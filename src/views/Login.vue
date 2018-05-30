@@ -1,5 +1,8 @@
 <template>
     <div class="mcj_login">
+        <div class="lg">
+            <img src="../assets/lg.png" alt="" width="100%">
+        </div>
         <group label-width="4.5em" label-margin-right="2em" label-align="right">
             <!-- <h1>登录页</h1> -->
             <x-input title="登录账号" placeholder="请输入用户账号" v-model="username" :required="required"></x-input>
@@ -104,6 +107,11 @@ p2r(size){
 
 .mcj_login{
     padding-top: p2r(300);
+
+    .lg{
+        width p2r(300)
+        margin 0 auto
+    }
     .mcj_login_btnwarp{
         margin-top: p2r(50);
     }

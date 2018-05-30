@@ -220,7 +220,7 @@ p2r(size){
                 -webkit-box-orient vertical
             }
             .ctx_img{
-                height p2r(210)
+                height p2r(220)
                 padding 0 p2r(20)
                 img{
                     width p2r(200)
