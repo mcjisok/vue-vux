@@ -79,7 +79,7 @@ export default {
             console.log(arg)
         },
         show (index) {
-            // console.log(i)
+            console.log(i)
             console.log(index)
             this.$refs.previewer.show(index)
         },
