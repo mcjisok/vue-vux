@@ -10,7 +10,7 @@
                 <!-- <router-link :to="'/home/push/'+content._id">                 -->
                     <h4>{{content.pushTitle}}</h4>
                     <p>{{content.pushContent}}</p>
-                </router-link>
+                <!-- </router-link> -->
             </div>
             <div class="drafts_del">
                 <a href="javascript:;" @click="confirValue = !confirValue">

@@ -135,7 +135,8 @@ export default {
                 pushImageList:this.imgs,
                 isDrafts:this.isPush,
                 userID:this.$store.state.nowLoginUserID,
-                pushID:this.pushID
+                pushID:this.pushID,
+                meta:{}
             })
             .then(res=>{
                 console.log(res)

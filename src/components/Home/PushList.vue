@@ -10,11 +10,11 @@
                         <div class="ctx_head">
                             <div class="head_left">
                                 <div class="pensonal_headimg">
-                                    <img src="@/assets/kyb.png" alt="" width="80%">
+                                    <img :src="host + n.userID.userInfoPhoto" alt="" width="80%">
                                 </div>
                                 <div class="push_info">
-                                    <p>卡比兽的土豆</p>
-                                    <p class="push_time">{{n.meta.createAt | moment('YYYY年MM月DD日 HH:mm:ss')}}</p>
+                                    <p>{{n.userID.name}}</p>
+                                    <p class="push_time">{{n.pushdateAt | moment('YYYY年MM月DD日 HH:mm:ss')}}</p>
                                 </div>
                             </div>
                             <div class="head_right"></div>
@@ -65,7 +65,8 @@ export default {
             hasMore:true,
             GET_PUSHLIST_API:this.HOST.host + '/getpushlist',   
 
-            loadmoreSW:true
+            loadmoreSW:true,
+            host:this.HOST.host
         }
     },
     // directives: {
@@ -79,7 +80,7 @@ export default {
             console.log(arg)
         },
         show (index) {
-            console.log(i)
+            // console.log(i)
             console.log(index)
             this.$refs.previewer.show(index)
         },
@@ -219,7 +220,7 @@ p2r(size){
                 -webkit-box-orient vertical
             }
             .ctx_img{
-                height p2r(220)
+                height p2r(210)
                 padding 0 p2r(20)
                 img{
                     width p2r(200)
@@ -247,7 +248,7 @@ p2r(size){
     list-style: none;
     float: left;
     width: 31.3%;
-    margin: 0 2% 2% 0;
+    margin: 0 2% 0 0;
 }
 
 .figure-list figure {

@@ -32,7 +32,7 @@ export default {
             _this.$http.post(_this.getDraftsListAPI,{_id:_this.userID})
             .then((res)=>{
                 console.log('草稿数据')
-                console.log(res)
+                // console.log(res)
                 _this.draftsList = res.data
                 // console.log()
             })
