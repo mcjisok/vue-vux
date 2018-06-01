@@ -38,6 +38,9 @@
                             <previewer :list="list" ref="previewer" :options="options" @on-index-change="logIndexChange"></previewer>
                             </div> -->
                         </div>
+
+                        <Comment :pushID="n._id" :fromID="$store.state.nowLoginUserID" :comment="n.comment"></Comment>
+
                     </div>
                 </li>
                 <load-more tip="正在加载" v-if="!loadmoreSW"></load-more>
@@ -53,6 +56,7 @@
 
 <script>
 import { TransferDom } from 'vux'
+import Comment from '@/components/Home/Comment'
 export default {
     name:'pushlist',
     data () {
@@ -73,7 +77,7 @@ export default {
     //     TransferDom
     // },
     components: {
-        
+        Comment
     },
     methods: {
         logIndexChange (arg) {
@@ -220,7 +224,7 @@ p2r(size){
                 -webkit-box-orient vertical
             }
             .ctx_img{
-                height p2r(220)
+                height p2r(210)
                 padding 0 p2r(20)
                 img{
                     width p2r(200)

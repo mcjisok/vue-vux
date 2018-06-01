@@ -52,19 +52,25 @@ import global_ from "./assets/commonjs/Global";
 Vue.prototype.HOST = global_
 
 // 路由守卫
-// router.beforeEach((to, from, next) => {
-//   if (to.path === '/login') {
-//     console.log('登录页')
-//     console.log(store.state.isLogin)
-//     next()
-//   }
-//   else if(to.path === '/home'){
-//     router.push('/home/index')
-//   }
-//   else{
-//     next()
-//   }
-// })
+
+router.beforeEach((to, from, next) => {
+  if (to.path === '/login') {
+    console.log('登录页')
+    console.log(store.state.isLogin)
+    next()
+  }
+  else if (store.state.isLogin === false){
+    router.push('/login')
+    next()
+  }
+  else if(to.path === '/home'){
+    router.push('/home/index')
+    next()
+  }
+  else{
+    next()
+  }
+})
 
 
 /* eslint-disable no-new */

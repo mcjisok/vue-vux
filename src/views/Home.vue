@@ -1,6 +1,8 @@
 <template>
     <div class="mcj_home">
-        <x-header :title=pageTitle class="xheader" style="width: 100%; position: fixed; left: 0px; top: 0px; z-index: 100;"></x-header>        
+        <x-header :title=pageTitle class="xheader" style="width: 100%; position: fixed; left: 0px; top: 0px; z-index: 100;">
+            <a slot="right" @click="routerJump()" v-if="this.$route.path === '/home/index'">发布动态</a>
+        </x-header>        
         
         <div class="content">
             <!-- <div class="topbarbox"></div>            
@@ -45,6 +47,9 @@ export default {
         show:function(){
             // console.log(this.a)
             this.$router.push('/home/index')
+        },
+        routerJump:function(){
+            this.$router.push('/home/push')            
         }
     },
     mounted:function () {

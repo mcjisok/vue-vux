@@ -53,12 +53,21 @@ a{
 
 
 /* 页面公共样式 基于vux组件修改的样式 */
-
+*{ -webkit-tap-highlight-color: rgba(0,0,0,0);-webkit-tap-highlight-color: transparent; /* For some Androids */ }  
+input, button, select, textarea {
+outline: none;
+-webkit-appearance: none;
+border-radius: 0;
+}
 .topbarbox{
     height: 46px;
 }
 .navbarbox{
     height: p2r(85);
+}
+
+.bothClear{
+  clear both
 }
 
 </style>
