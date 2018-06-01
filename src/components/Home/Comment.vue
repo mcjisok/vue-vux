@@ -168,7 +168,7 @@ p2r(size){
 
         input[type=button]{
             width p2r(100)
-            height 24px
+            height 30px
             border-radius 10px
             background #66cccc
             border none
