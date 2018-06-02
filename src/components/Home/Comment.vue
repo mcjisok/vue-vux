@@ -1,7 +1,7 @@
 <template>
     <div class="comment">
         <div class="comment_input">
-            <input type="text" placeholder="点击评论..." @focus="focusInput()" @blur="blurInput()" v-model="commentContent" v-bind:class="{inputOnFocus:submitBtn||comment_content_is_empty}">
+            <input type="text" :placeholder="placeholder" @focus="focusInput()" @blur="blurInput()" v-model="commentContent" v-bind:class=" {inputOnFocus:submitBtn||comment_content_is_empty}" v-focus="focusState">
             <transition name="fade">
                 <div class="submit_btn" v-if="submitBtn||comment_content_is_empty">
                     <input type="button" value="评论" @click="saveComment()">
@@ -9,7 +9,7 @@
             </transition>
         </div>
 
-        <div class="comment_list" v-if="comment.length > 0">
+        <div class="comment_list" v-if="local_comment.length > 0">
             <div class="cl_head">
                 <img src="../commonimg/liutan.png" alt="" width="25">
                 <p>留言区</p>
@@ -17,25 +17,42 @@
             <div class="cl_warp">
                 <ul>
                     <li>
-                        <div class="cl_con" v-for="(item,i) in comment" :key="i">
+                        <div class="cl_con" v-for="(item,i) in local_comment" :key="i">
                             <div class="userInfo">
                                 <div class="InfoImg">
                                     <img :src="host + item.from.userInfoPhoto" alt="" width="30" height="30">
                                 </div>
+
                                 <div class="InfoName">
                                     <!-- <router-link>用户名称</router-link> -->
                                     <a href="javascript:;">{{item.from.name}}</a>
-                                    <p>2018年5月31日21:24:00</p>
-                                    
+                                    <p>2018年5月31日21:24:00</p>                                    
                                 </div>
+
                                 <div class="InfoNice">
-                                    <a href="javascript:;" class="niceIcon"></a>
-                                    
+                                    <a href="javascript:;" class="niceIcon" @click="reply(item.from.name,item.from._id,item._id)"></a>                                    
                                 </div>
+
                                 <div class="bothClear"></div>
                             </div>
                             <div class="commentText">
                                 <p>{{item.content}}</p>
+                            </div>
+
+                            <div class="replyList" v-for="(n,i) in item.reply" :key="i" v-if="item.reply.length > 0">
+                                <div class="reply_content">
+                                    <p>
+                                        {{n.from.name}} 回复 {{n.to.name}}:{{n.content}}
+                                    </p>
+                                    <div class="reply_icon">
+                                        <a href="javascript:;" @click="reply(item.from.name)"></a>                                    
+                                    </div>
+                                </div>
+                                    
+                                
+
+                                <div class="bothClear"></div>
+                                
                             </div>
                             
                         </div>
@@ -56,14 +73,33 @@ export default {
         'comment'    
 
     ],
+    directives: {
+        focus: {
+            update: function (el, {value}) {
+                if (value) {
+                el.focus()
+                }
+            }
+        }
+    },
     data(){
         return{
             submitBtn:false,
+            isFocus:true,
+            placeholder:'点击评论...',
             
             // postdata
             commentID:'',
             commentContent:'',
+
+            replyFromID:'',
+            replyToId:'',
             replyContent:'',
+
+            // hasreply:true,
+
+            // local obj
+            local_comment:this.comment,
 
             // API
             saveCommentAPI:this.HOST.host + '/saveComment',
@@ -101,17 +137,36 @@ export default {
                     cid:_this.commentID,
                     push:_this.pushID,
                     from:_this.fromID,
+                    to:_this.replyToId,
                     content:_this.commentContent
                 })
                 .then(res=>{
                     console.log(res)
+                    _this.local_comment.unshift(res.data.data)
+                    _this.local_comment = _this.local_comment.slice(0,3)
+                    _this.$vux.toast.show({
+                        text: '评论成功',
+                        type:'success',
+                        onHide () {                            
+                            // _this.$router.push('/home/index')
+                            _this.commentContent = ''
+                        }
+                    })
                 })
                 .catch(e=>{
                     console.log(e)
                 })
-            }
+            }            
+        },
+        reply:function(name,toID,commentID){
+            let _this = this
+            console.log(name,toID,commentID)
+            _this.placeholder = '回复'+name+':'
+            _this.replyToId = toID
+            _this.commentID = commentID
             
         }
+
     }
 }
 </script>
@@ -239,7 +294,7 @@ p2r(size){
                             height 20px
                             display block
                             position relative
-                            background-image url('../commonimg/zan.png')
+                            background-image url('../commonimg/reply.png')
                             background-size 20px 20px
                             
                         }
@@ -258,6 +313,50 @@ p2r(size){
                         font-size 14px
                         color #333                        
                     }
+                }
+                .replyList{
+                    // width p2r(560)
+                    width 100%
+                    height 31px
+                    margin-top p2r(10)
+                    margin-bottom p2r(15)
+                    // height p2r(80)
+                    // padding-left p2r(80)
+                    
+                    .reply_content{
+                        width p2r(560)
+                        height 31px
+                        padding 0 p2r(0) 0 p2r(0)
+                        
+                        display -webkit-box
+                        -webkit-line-clamp 2
+                        overflow hidden
+                        text-overflow ellipsis
+                        -webkit-box-orient vertical
+                        p{
+                            padding-left p2r(80)
+                            width p2r(480)
+                            height 31px
+                            font-size 14px
+                            color #333                                                
+                        }
+                        .reply_icon{
+                            width 30px
+                            height 30px
+                            position relative
+                            top -30px
+                            left p2r(500)
+                            a{
+                                width 20px
+                                height 20px
+                                display block
+                                background-image url('../commonimg/reply.png')
+                                background-size 20px 20px
+                            }
+                        }
+                    }
+                    
+                    
                 }
             }
         }
