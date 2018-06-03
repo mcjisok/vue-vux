@@ -1,7 +1,7 @@
 <template>
     <div class="comment">
         <div class="comment_input">
-            <input type="text" :placeholder="placeholder" @focus="focusInput()" @blur="blurInput()" v-model="commentContent" v-bind:class=" {inputOnFocus:submitBtn||comment_content_is_empty}" >
+            <input type="text" :placeholder="placeholder" @focus="focusInput()" @blur="blurInput()" v-model="commentContent" v-bind:class=" {inputOnFocus:submitBtn||comment_content_is_empty}" v-focus="focusStatus">
             <transition name="fade">
                 <div class="submit_btn" v-if="submitBtn||comment_content_is_empty">
                     <input type="button" value="评论" @click="saveComment()">
@@ -45,7 +45,7 @@
                                         {{n.from.name}} 回复 {{n.to.name}}:{{n.content}}
                                     </p>
                                     <div class="reply_icon">
-                                        <a href="javascript:;" @click="reply(item.from.name)"></a>                                    
+                                        <span @click="reply(n.from.name,n.from._id,item._id)"></span>                                    
                                     </div>
                                 </div>
                                     
@@ -70,7 +70,8 @@ export default {
     props:[        
         'pushID',
         'fromID',//userID   
-        'comment'    
+        'comment',
+        'pushIndex'  
 
     ],
     directives: {
@@ -80,7 +81,7 @@ export default {
                 el.focus()
                 }
             }
-        }
+        },
     },
     data(){
         return{
@@ -96,10 +97,13 @@ export default {
             replyToId:'',
             replyContent:'',
 
+            focusStatus:false,
             // hasreply:true,
 
             // local obj
+            local_comment:[],
             local_comment:this.comment,
+            local_pushIndex:this.pushIndex,
 
             // API
             saveCommentAPI:this.HOST.host + '/saveComment',
@@ -117,6 +121,12 @@ export default {
             else{
                 return true
             }
+        }
+    },
+    // 通过监听属性，来监听父组件传进来的props，如果props动态更新了，子组件的本地数据也更新
+    watch:{
+        comment:function(){
+            this.local_comment = this.comment            
         }
     },
     methods:{
@@ -141,17 +151,18 @@ export default {
                     content:_this.commentContent
                 })
                 .then(res=>{
-                    console.log(res)
-                    _this.local_comment.unshift(res.data.data)
-                    _this.local_comment = _this.local_comment.slice(0,3)
-                    _this.$vux.toast.show({
-                        text: '评论成功',
-                        type:'success',
-                        onHide () {                            
-                            // _this.$router.push('/home/index')
-                            _this.commentContent = ''
-                        }
-                    })
+                    // console.log(res)
+                    // _this.local_comment.unshift(res.data.data)
+                    // _this.local_comment = _this.local_comment.slice(0,3)
+                    // _this.$vux.toast.show({
+                    //     text: '评论成功',
+                    //     type:'success',
+                    //     onHide () {                            
+                    //         // _this.$router.push('/home/index')
+                    //         _this.commentContent = ''
+                    //     }
+                    // })
+                    this.$emit('reply',{res:res,key:_this.pushIndex})
                 })
                 .catch(e=>{
                     console.log(e)
@@ -164,10 +175,18 @@ export default {
             _this.placeholder = '回复'+name+':'
             _this.replyToId = toID
             _this.commentID = commentID
-            
-            
+            this.focusStatus = true       
+        },
+        focusStatusToFalse:function(){
+            this.focusStatus = false
+            this.placeholder = '点击评论...'
+            this.commentID = ''
+            // console.log('1111')
         }
-
+        
+    },
+    mounted:function(){
+        window.addEventListener('scroll', this.focusStatusToFalse)
     }
 }
 </script>
@@ -306,54 +325,54 @@ p2r(size){
                     padding p2r(20) p2r(50) p2r(20) p2r(80)
                     // margin-top p2r(10)
                     // margin-bottom p2r(20)
-                    background-color #f5ffff
-                    display -webkit-box
-                    -webkit-line-clamp 2
-                    overflow hidden
-                    text-overflow ellipsis
-                    -webkit-box-orient vertical
-                    p{
-                        font-size 14px
-                        color #333                        
-                    }
-                }
-                .replyList{
-                    // width p2r(560)
-                    width 100%
-                    height 41px
-                    display block
-                    padding p2r(5) 0
-                    background-color #f3f4f6
-                    // margin-top p2r(10)
-                    // margin-bottom p2r(10)
-                    // height p2r(80)
-                    // padding-left p2r(80)
+                    // background-color #f5ffff
                     
-                    .reply_content{
-                        width p2r(560)
-                        height 28px
-                        padding 0 p2r(0) 0 p2r(0)
-                        padding-left p2r(80)
-                        
+                    p{
+                        word-wrap:break-word
+                        font-size 14px
+                        color #333     
                         display -webkit-box
                         -webkit-line-clamp 2
                         overflow hidden
                         text-overflow ellipsis
-                        -webkit-box-orient vertical
+                        -webkit-box-orient vertical                  
+                    }
+                }
+                .replyList{
+                    margin-left p2r(80)
+                    // width 85%
+                    width p2r(500)
+                    display block
+                    // padding p2r(5) 0
+                    background-color #f3f4f6
+                    padding p2r(20) p2r(0) p2r(20) p2r(0)
+                    
+                    
+                    .reply_content{
+                        width p2r(560)
+                        padding-left p2r(20)                        
+                        
                         p{
-                            // padding-left p2r(80)
+                            margin-right p2r(30)
                             width p2r(400)
-                            height 28px
+                            // height 28px
                             font-size 12px
-                            color #333                                                
+                            color #333      
+                            display -webkit-box
+                            -webkit-line-clamp 2
+                            overflow hidden
+                            text-overflow ellipsis
+                            -webkit-box-orient vertical   
+                            float left                                       
                         }
                         .reply_icon{
-                            width 30px
-                            height 30px
-                            position relative
+                            width 25px
+                            height 25px
+                            float left
+                            // position relative
                             top -25px
                             left p2r(440)
-                            a{
+                            span{
                                 width 20px
                                 height 20px
                                 display block

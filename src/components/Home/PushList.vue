@@ -39,7 +39,7 @@
                             </div> -->
                         </div>
 
-                        <Comment :pushID="n._id" :fromID="$store.state.nowLoginUserID" :comment="n.comment"></Comment>
+                        <Comment :pushID="n._id" :fromID="$store.state.nowLoginUserID" :comment="n.comment" :pushIndex="i" @reply="changePush"></Comment>
 
                     </div>
                 </li>
@@ -118,6 +118,12 @@ export default {
                 // })
                 this.loadmoreSW = !this.loadmoreSW
             }
+        },
+        changePush:function(msg){
+            console.log('接收到子组件传出来的数据')
+            console.log(msg)
+            // this.pushlist[msg.key] = msg.res.data.data
+            this.$set(this.pushlist, msg.key, msg.res.data.data)
         }
     },
     mounted:function () {
@@ -211,6 +217,18 @@ p2r(size){
                 }
             }
             .ctx_warp{
+                p{
+                    padding 0 p2r(25)
+                    margin-top p2r(15)
+                    margin-bottom p2r(15)
+                    color #999999
+                    word-wrap:break-word /* 允许数字字母换行*/
+                    display -webkit-box
+                    -webkit-line-clamp 2
+                    overflow hidden
+                    text-overflow ellipsis
+                    -webkit-box-orient vertical
+                }
                 padding 0 p2r(25)
                 margin-top p2r(15)
                 margin-bottom p2r(15)
