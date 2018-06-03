@@ -1,7 +1,7 @@
 <template>
     <div class="comment">
         <div class="comment_input">
-            <input type="text" :placeholder="placeholder" @focus="focusInput()" @blur="blurInput()" v-model="commentContent" v-bind:class=" {inputOnFocus:submitBtn||comment_content_is_empty}" v-focus="focusState">
+            <input type="text" :placeholder="placeholder" @focus="focusInput()" @blur="blurInput()" v-model="commentContent" v-bind:class=" {inputOnFocus:submitBtn||comment_content_is_empty}" >
             <transition name="fade">
                 <div class="submit_btn" v-if="submitBtn||comment_content_is_empty">
                     <input type="button" value="评论" @click="saveComment()">
@@ -165,6 +165,7 @@ export default {
             _this.replyToId = toID
             _this.commentID = commentID
             
+            
         }
 
     }
@@ -256,6 +257,7 @@ p2r(size){
         }
         .cl_warp{
             .cl_con{
+                // border 1px solid #66cccc
                 .userInfo{
                     position relative
                     .InfoImg{
@@ -301,9 +303,10 @@ p2r(size){
                     }
                 }
                 .commentText{
-                    padding 0 p2r(50) 0 p2r(80)
-                    margin-top p2r(10)
-                    margin-bottom p2r(15)
+                    padding p2r(20) p2r(50) p2r(20) p2r(80)
+                    // margin-top p2r(10)
+                    // margin-bottom p2r(20)
+                    background-color #f5ffff
                     display -webkit-box
                     -webkit-line-clamp 2
                     overflow hidden
@@ -317,16 +320,20 @@ p2r(size){
                 .replyList{
                     // width p2r(560)
                     width 100%
-                    height 31px
-                    margin-top p2r(10)
-                    margin-bottom p2r(15)
+                    height 41px
+                    display block
+                    padding p2r(5) 0
+                    background-color #f3f4f6
+                    // margin-top p2r(10)
+                    // margin-bottom p2r(10)
                     // height p2r(80)
                     // padding-left p2r(80)
                     
                     .reply_content{
                         width p2r(560)
-                        height 31px
+                        height 28px
                         padding 0 p2r(0) 0 p2r(0)
+                        padding-left p2r(80)
                         
                         display -webkit-box
                         -webkit-line-clamp 2
@@ -334,23 +341,23 @@ p2r(size){
                         text-overflow ellipsis
                         -webkit-box-orient vertical
                         p{
-                            padding-left p2r(80)
-                            width p2r(480)
-                            height 31px
-                            font-size 14px
+                            // padding-left p2r(80)
+                            width p2r(400)
+                            height 28px
+                            font-size 12px
                             color #333                                                
                         }
                         .reply_icon{
                             width 30px
                             height 30px
                             position relative
-                            top -30px
-                            left p2r(500)
+                            top -25px
+                            left p2r(440)
                             a{
                                 width 20px
                                 height 20px
                                 display block
-                                background-image url('../commonimg/reply.png')
+                                background-image url('../commonimg/reply1.png')
                                 background-size 20px 20px
                             }
                         }
