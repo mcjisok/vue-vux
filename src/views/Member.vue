@@ -2,7 +2,7 @@
     <div class="member">
         <div class="topbarbox"></div>            
         <div class="member_warp">
-            <blur :blur-amount=40 :url="this.HOST.host + url">
+            <blur :blur-amount=40 :url="this.HOST.host + url" :height="blur_height">
                 <p class="center"><img :src="this.HOST.host + url"></p>
                 <!-- <p class="member_name">用户名称</p> -->
             </blur>
@@ -40,6 +40,7 @@ import { Badge } from 'vux'
 export default {
     data(){
         return{
+            blur_height:150,
             url: this.$store.state.userinfo.userInfoPhoto,
             title:'用户中心',
         }

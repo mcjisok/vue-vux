@@ -39,7 +39,7 @@
                                 <p>{{item.content}}</p>
                             </div>
 
-                            <div class="replyList" v-for="(n,i) in item.reply" :key="i" v-if="item.reply.length > 0">
+                            <div class="replyList" v-for="(n,i) in item.reply.slice(0,3)" :key="i" v-if="item.reply.length > 0">
                                 <div class="reply_content">
                                     <p>
                                         {{n.from.name}} 回复 {{n.to.name}}:{{n.content}}
@@ -151,18 +151,22 @@ export default {
                     content:_this.commentContent
                 })
                 .then(res=>{
-                    // console.log(res)
+                    console.log(res)
                     // _this.local_comment.unshift(res.data.data)
                     // _this.local_comment = _this.local_comment.slice(0,3)
-                    // _this.$vux.toast.show({
-                    //     text: '评论成功',
-                    //     type:'success',
-                    //     onHide () {                            
-                    //         // _this.$router.push('/home/index')
-                    //         _this.commentContent = ''
-                    //     }
-                    // })
-                    this.$emit('reply',{res:res,key:_this.pushIndex})
+                   
+                    if(res.data.code === 200 ){
+                        _this.$vux.toast.show({
+                            text: '评论成功',
+                            type:'success',
+                            onHide () {                            
+                                // _this.$router.push('/home/index')
+                                _this.commentContent = ''
+                                _this.placeholder = '点击评论...',                                
+                                _this.$emit('reply',{res:res,key:_this.pushIndex})                                
+                            }
+                        })
+                    }
                 })
                 .catch(e=>{
                     console.log(e)

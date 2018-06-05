@@ -52,6 +52,9 @@ export default {
             this.$router.push('/home/push')            
         }
     },
+    beforeMount:function (){
+          
+    },
     mounted:function () {
         this.show();
     }

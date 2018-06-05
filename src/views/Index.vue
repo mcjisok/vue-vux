@@ -1,7 +1,7 @@
 <template>
     <div class="indexPage">
         <div class="topbarbox"></div>            
-        <swiper :list="demo01_list" v-model="demo01_index" :loop="isloop" :auto="isauto"></swiper>
+        <!-- <swiper :list="demo01_list" v-model="demo01_index" :loop="isloop" :auto="isauto"></swiper> -->
         <!-- <panel header="我的圈子" :footer="footer" :list="list" :type="type" ></panel> -->
         <pushlist></pushlist>
         <div class="navbarbox"></div>

@@ -3,6 +3,7 @@
         <!-- <scroller lock-x height="200px" @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" :scroll-bottom-offst="200"> -->
         
         <div class="pl_head"><p>我的圈子</p></div>
+        <loading :show="loadingShow" text=""></loading>        
         <div class="pl_content">
             <ul>
                 <li v-for="(n,i) in pushlist" :key="i">
@@ -27,8 +28,8 @@
                             
                             <ul class="figure-list">
                                 <li v-for="(item, index) in n.pushImageList.slice(0,3)" :key="index">
-                                    <figure v-bind:style="{backgroundImage:'url(http://localhost:3000'+item+')'}" class="previewer-demo-img">
-                                        <a href="#"></a>
+                                    <figure v-bind:style="{backgroundImage:'url('+host+item+')'}" class="previewer-demo-img">
+                                        <!-- <a href="#"></a> -->
                                         <!-- <img src="" alt=""> -->
                                     </figure>
                                 </li>                            
@@ -70,7 +71,9 @@ export default {
             GET_PUSHLIST_API:this.HOST.host + '/getpushlist',   
 
             loadmoreSW:true,
-            host:this.HOST.host
+            host:this.HOST.host,
+
+            loadingShow:true
         }
     },
     // directives: {
@@ -103,7 +106,8 @@ export default {
                         _this.loadmoreSW = true
                         _this.total = res.data.toal
                         _this.hasMore = res.data.hasMore                        
-                        _this.pushlist = _this.pushlist.concat(res.data.pushList)                        
+                        _this.pushlist = _this.pushlist.concat(res.data.pushList)  
+                        _this.loadingShow = false                      
                     }, 300);
                     
                 })
@@ -126,7 +130,13 @@ export default {
             this.$set(this.pushlist, msg.key, msg.res.data.data)
         }
     },
+    beforeMount:function(){
+        // this.loadingShow = true
+        // console.log('未挂载')
+    },
     mounted:function () {
+        // this.loadingShow = false
+        // console.log('已挂载')
         this.loadmore();
         let _this = this;  
             // 设置一个开关来避免重负请求数据  
@@ -180,6 +190,7 @@ p2r(size){
             .ctx_head{
                 width 100%
                 height p2r(100)
+                margin-top p2r(10)
                 position relative
                 
                 .head_left{
@@ -218,7 +229,7 @@ p2r(size){
             }
             .ctx_warp{
                 p{
-                    padding 0 p2r(25)
+                    padding 0 p2r(10)
                     margin-top p2r(15)
                     margin-bottom p2r(15)
                     color #999999

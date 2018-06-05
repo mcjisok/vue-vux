@@ -25,7 +25,7 @@
             <div class="preview" v-for="(i,index) in imgs" :key="i">
                 <span style="font-size:20px;">Loading</span>
                 <!-- <spinner type="ios" size="40px"></spinner> -->
-                <x-img :src="'http://localhost:3000' + i"  @on-success="success" @on-error="error" class="ximg-demo" error-class="ximg-error" :offset="-20" container="#vux_view_box_body"></x-img>
+                <x-img :src="host + i"  @on-success="success" @on-error="error" class="ximg-demo" error-class="ximg-error" :offset="-20" container="#vux_view_box_body"></x-img>
                 <a @click="del_pushimg(index)" class="del_icon"><icon type="cancel" class="del_icon" ></icon></a>
             </div>
             <div style="clear:both"></div>
@@ -55,8 +55,8 @@ export default {
 
             // api
             uploadPushImgApi:this.HOST.host + '/uploadPushImg',
-            savaPushApi:this.HOST.host + '/savePush'
-
+            savaPushApi:this.HOST.host + '/savePush',
+            host:this.HOST.host,      
             
         }
     },

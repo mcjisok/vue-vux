@@ -7,7 +7,7 @@ import store from './store/index'
 
 Vue.config.productionTip = false
 
-import { Group, XInput, XButton, Flexbox, FlexboxItem, Tabbar, TabbarItem, XHeader, Swiper, Panel, Alert, XTextarea, Cell, XImg, Spinner, Icon, XSwitch, Previewer, Scroller, LoadMore,Confirm } from 'vux'
+import { Group, XInput, XButton, Flexbox, FlexboxItem, Tabbar, TabbarItem, XHeader, Swiper, Panel, Alert, XTextarea, Cell, XImg, Spinner, Icon, XSwitch, Previewer, Scroller, LoadMore, Confirm, Loading} from 'vux'
 
 Vue.component('group', Group)
 Vue.component('x-input', XInput)
@@ -30,6 +30,7 @@ Vue.component('previewer', Previewer)
 // Vue.component('scroller', Scroller)
 Vue.component('load-more', LoadMore)
 Vue.component('confirm', Confirm)
+Vue.component('loading', Loading)
 // vux以插件形式引入
 import { AlertPlugin } from 'vux'
 Vue.use(AlertPlugin)
