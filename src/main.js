@@ -7,7 +7,7 @@ import store from './store/index'
 
 Vue.config.productionTip = false
 
-import { Group, XInput, XButton, Flexbox, FlexboxItem, Tabbar, TabbarItem, XHeader, Swiper, Panel, Alert, XTextarea, Cell, XImg, Spinner, Icon, XSwitch, Previewer, Scroller, LoadMore, Confirm, Loading} from 'vux'
+import { Group, XInput, XButton, Flexbox, FlexboxItem, Tabbar, TabbarItem, XHeader, Swiper, SwiperItem,Panel, Alert, XTextarea, Cell, XImg, Spinner, Icon, XSwitch, Previewer, Scroller, LoadMore, Confirm, Loading} from 'vux'
 
 Vue.component('group', Group)
 Vue.component('x-input', XInput)
@@ -18,6 +18,7 @@ Vue.component('tabbar', Tabbar)
 Vue.component('tabbar-item', TabbarItem)
 Vue.component('x-header', XHeader)
 Vue.component('swiper', Swiper)
+Vue.component('swiper-item', SwiperItem)
 Vue.component('panel', Panel)
 Vue.component('alert', Alert)
 Vue.component('x-textarea', XTextarea)
