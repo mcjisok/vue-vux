@@ -4,6 +4,8 @@
         <group>
             <x-input :placeholder="input_placeholder" v-model="pushTitle" ></x-input>
             <x-textarea :max="200" name="description" :placeholder="textarea_placeholder" v-model="pushContent" ></x-textarea>
+            <popup-picker title="一级标签" :data="firstTagList" v-model="firstTag" @on-show="onShow" @on-hide="onHide" @on-change="onChange" placeholder="请选择"></popup-picker>
+            <popup-picker popup-title="请选择" title="二级标签" :data="subTagList" v-model="subTag" @on-show="onShow" @on-hide="onHide" @on-change="onChangeSub" placeholder="请选择"></popup-picker>
             <x-switch title="是否存为草稿" v-model="isPush"></x-switch>
         </group>
         <group>
@@ -36,6 +38,8 @@
 </template>
 
 <script>
+// 引入lodash工具库
+// let _array = require('lodash/array');
 export default {
     data(){
         return{
@@ -49,13 +53,22 @@ export default {
             isPush:false,
             isrequired:true,
 
+            // popup数据绑定
+            firstTag:[],
+            subTag:[],
+
             // data
             pushTitle:'',
             pushContent:'',
 
+            tagList:[],
+            firstTagList:[],
+            subTagList:[],
+
             // api
             uploadPushImgApi:this.HOST.host + '/uploadPushImg',
             savaPushApi:this.HOST.host + '/savePush',
+            getTagList:this.HOST.host + '/getTagList',
             host:this.HOST.host,      
             
         }
@@ -136,6 +149,7 @@ export default {
                 isDrafts:this.isPush,
                 userID:this.$store.state.nowLoginUserID,
                 pushID:this.pushID,
+                tagID:this.subTag,
                 meta:{}
             })
             .then(res=>{
@@ -162,7 +176,60 @@ export default {
             this.imgs = this.$store.state.drafts.pushImageList,
             this.isPush = this.$store.state.drafts.isDrafts
             
+        },
+
+        // popup picker方法
+        onChange (val) {
+            // console.log('val change', val)
+            let strVal = val[0].toString()
+            let index = this.firstTagList[0].indexOf(strVal)
+            // console.log('当前选择的位置为',strVal,index)
+
+            let sub = this.tagList[index].subTagList
+            console.log(sub)
+            let subTag = []
+            sub.forEach(function(e){
+                subTag.push(e.tagName)
+            })
+            // 获取二级标签列表
+            this.subTagList = [subTag]
+
+            // 重置二级标签选择的值
+            this.subTag = []
+
+        },
+        onChangeSub(val){
+            console.log('二级标签为：',val)
+        },
+        onShow () {
+            // console.log('on show')
+        },
+        onHide (type) {
+            // console.log('on hide', type)
         }
+    },
+    beforeMount:function(){
+        let _this = this
+        this.$http.get(this.getTagList)
+        .then(res=>{
+            let a =res.data.data
+
+            // 将所有tag数据赋值给tagList 重要！
+            _this.tagList = res.data.data
+
+            let firstTag = []
+            console.log(res.data.data)
+            // _this.tagList = res.data.data
+            a.forEach(function(e){  
+                console.log(e)
+                firstTag.push(e.tagName)
+            })
+            _this.firstTagList.push(firstTag)
+            console.log(firstTag)
+        })
+        .catch(e=>{
+            console.log(e)
+        })
     },
     mounted:function(){
         if(this.pushID !== ''){
