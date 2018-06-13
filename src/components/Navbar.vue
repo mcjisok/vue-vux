@@ -8,8 +8,9 @@
                 </router-link>
             </li>
             <li>
-                <router-link to="/login">
-                <img src="../assets/icon/msg2.png" alt="">
+                <router-link to="/home/group">
+                <img v-if="nowRouterPath=='/home/group'" src="../assets/icon/msg21.png" alt="">
+                <img v-else src="../assets/icon/msg2.png" alt="">
                 </router-link>
             </li>
             <li>

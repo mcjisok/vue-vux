@@ -10,6 +10,8 @@ import IndexPage from '@/views/Index'
 import PushPage from '@/views/Push'
 import ZonePage from '@/views/Zone'
 import MemberPage from '@/views/Member'
+import GroupPage from '@/views/Group/groupList'
+import NewGroupPage from '@/views/Group/addNewGroup'
 // 个人中心子页面
 import SettingPage from '@/views/Member/Setting'
 import Drafts from '@/views/Member/Drafts'
@@ -48,6 +50,17 @@ export default new Router({
           path:'push',
           name:'Push',
           component:PushPage
+        },
+        {
+          path:'group',
+          name:'Group',
+          component:GroupPage,          
+        },
+        {
+          // 新建分组
+          path:'newgroup',
+          name:'NewGroup',
+          component:NewGroupPage
         },
         {
           path:'push/:id',
