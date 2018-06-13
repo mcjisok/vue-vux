@@ -64,7 +64,7 @@ export default {
 
             // api
             uploadGroupImgApi:this.HOST.host + '/uploadGroupImg',
-            savaPushApi:this.HOST.host + '/savePush',
+            savaGroupApi:this.HOST.host + '/saveGroup',
             getTagList:this.HOST.host + '/getTagList',
             host:this.HOST.host,
         }
@@ -133,15 +133,14 @@ export default {
         // 发布新的push动态
         savePush:function(){
             let _this = this
-            this.$http.post(this.savaPushApi,{
-                pushTitle:this.pushTitle,
-                pushContent:this.pushContent,
-                pushImageList:this.imgs,
-                isDrafts:this.isPush,
-                userID:this.$store.state.nowLoginUserID,
-                pushID:this.pushID,
-                tagID:this.subTag,
-                meta:{}
+            this.$http.post(this.savaGroupApi,{
+                groupName:this.groupName,
+                groupDescription:this.groupDescription,
+                groupImg:this.imgURL,
+                // isDrafts:this.isPush,
+                groupLeader:this.$store.state.nowLoginUserID,
+                // pushID:this.pushID,
+                groupTag:this.subTag
             })
             .then(res=>{
                 console.log(res)
@@ -150,7 +149,25 @@ export default {
                         text: '发布成功',
                         type:'success',
                         onHide () {                            
-                            _this.$router.push('/home/index')
+                            _this.$router.push('/home/group')
+                        }
+                    })
+                }
+                else if(res.data.code === 404){
+                    _this.$vux.toast.show({
+                        text: '分组名已存在',
+                        type:'warn',
+                        onHide () {                            
+                            // _this.$router.push('/home/group')
+                        }
+                    })
+                }
+                else{
+                    _this.$vux.toast.show({
+                        text: '提交失败，请稍后再试',
+                        type:'warn',
+                        onHide () {                            
+                            // _this.$router.push('/home/group')
                         }
                     })
                 }
