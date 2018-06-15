@@ -139,6 +139,7 @@ export default {
                 groupImg:this.imgURL,
                 // isDrafts:this.isPush,
                 groupLeader:this.$store.state.nowLoginUserID,
+                groupUserList:this.$store.state.nowLoginUserID,
                 // pushID:this.pushID,
                 groupTag:this.subTag
             })

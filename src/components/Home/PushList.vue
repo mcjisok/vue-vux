@@ -5,7 +5,7 @@
         <div class="pl_head"><p>我的圈子</p></div>
         <loading :show="loadingShow" text=""></loading>        
         <div class="pl_content">
-            <ul>
+            <ul v-if="pushlist.length > 0">
                 <li v-for="(n,i) in pushlist" :key="i">
                     <div class="pl_context">
                         <div class="ctx_head">
@@ -120,6 +120,7 @@ export default {
                 //     text: '没有更多数据啦~~~',
                 //     type:'text'
                 // })
+                _this.loadingShow = false     
                 this.loadmoreSW = !this.loadmoreSW
             }
         },

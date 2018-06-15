@@ -5,31 +5,39 @@
             <p>我的分组</p>
         </div>
 
-        <div style="margin: 10px;overflow: hidden;" v-for="item in list">
+        <div style="margin: 10px;overflow: hidden;" v-for="(item,index) in list.slice(0,maxMyGroupLength)" :key="index">
             <masker style="border-radius: 3px;" color="64,64,64" :opacity="opacity">
-                <div class="m-img" :style="{backgroundImage: 'url(' + item.img + ')'}"></div>
+                <div class="m-img" :style="{backgroundImage: 'url(' +HOST+ item.groupImg + ')'}"></div>
                 <div slot="content" class="m-title">
-                {{item.title}}
+                {{item.groupName}}
                 <br/>
-                <span class="m-time">2016-03-18</span>
+                <span class="m-time">{{item.meta.createAt | moment('YYYY年MM月DD日 HH:mm:ss')}}</span>
                 </div>
             </masker>
+        </div>
+
+        <div class="loadMore"  v-if="groupHasMore">
+            <!-- <hr class="hrLine" style="width:20%"/>  XXXXX  <hr class="hrLine" style="width:80%"/> -->
+            <divider>
+                <p style="font-size:14px" v-if="downAndUp" @click="groupLoadMore()">更多</x-icon></p>
+                <p style="font-size:14px" v-else @click="grouphide()">收起来~</p>
+            </divider>
         </div>
 
         <div class="_head">
             <p>热门分组</p>
         </div>
 
-        <div style="margin: 10px;overflow: hidden;" v-for="item in list">
+        <!-- <div style="margin: 10px;overflow: hidden;" v-for="(item,index) in list" :key="index">
             <masker style="border-radius: 3px;" color="64,64,64" :opacity="opacity">
-                <div class="m-img" :style="{backgroundImage: 'url(' + item.img + ')'}"></div>
+                <div class="m-img" :style="{backgroundImage: 'url(' +HOST+ item.groupImg + ')'}"></div>
                 <div slot="content" class="m-title">
-                {{item.title}}
+                {{item.groupName}}
                 <br/>
-                <span class="m-time">2016-03-18</span>
+                <span class="m-time">{{item.meta.createAt| moment('YYYY年MM月DD日 HH:mm:ss')}}</span>
                 </div>
             </masker>
-        </div>
+        </div> -->
         <div class="navbarbox"></div>
     </div>
 </template>
@@ -39,17 +47,66 @@ export default {
     data(){
         return{
             opacity:0.6,
-            list: [{
-                title: '洗颜新潮流！人气洁面皂排行榜',
-                img: 'http://pic.58pic.com/58pic/13/32/23/75H58PICKmx_1024.jpg'
-            }, {
-                title: '美容用品 & 日用品（上）',
-                img: 'https://ss1.baidu.com/-4o3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=4ac31a85b5389b5027ffe652b534e5f1/a686c9177f3e6709b52f456437c79f3df8dc5579.jpg'
-            }, {
-                title: '远离车内毒气，日本车载空气净化器精选',
-                img: 'http://pic.58pic.com/58pic/13/32/23/75H58PICKmx_1024.jpg'
-            }]
+            list: [],
+
+            // 我的分组最多显示多少个
+            maxMyGroupLength:3,
+            // 热门分组最多显示多少个
+            maxHotGroupLength:3,
+
+            // API
+            HOST:this.HOST.host,
+            getMyGroupAPI:this.HOST.host + '/getMyGroupList'
         }
+    },
+    methods:{
+        getMyGroupList:function(){
+            let _this = this
+            let myID = this.$store.state.nowLoginUserID
+            this.$http.post(this.getMyGroupAPI,{
+                _id:myID,
+                state:true
+            })
+            .then(res=>{
+                console.log(res)
+                this.list = res.data.data.groupList
+                console.log(this.list)
+            })
+            .catch(e=>{
+                console.log(e)
+            })
+        },
+
+        groupLoadMore:function(){
+            this.maxMyGroupLength = this.list.length
+        },    
+        grouphide:function(){
+            this.maxMyGroupLength = 3
+        }
+            
+    },
+    computed:{
+        groupHasMore:function(){
+            if(this.list.length < this.maxMyGroupLength){
+                return false
+            }
+            else{
+                return true
+            }
+        },
+
+        downAndUp:function(){
+            if(this.list.length > this.maxMyGroupLength){
+                return true
+            }
+            else{
+                return false
+            }
+        }
+        
+    },
+    mounted:function(){
+        this.getMyGroupList()
     }
 }
 </script>
@@ -70,6 +127,12 @@ p2r(size){
             border-bottom:1px solid #E5E5E5
             font-size 14px
         }
+    }
+
+    .loadMore{
+        height 40px;
+        width 100%;
+        padding 0 p2r(20)
     }
 }
 
@@ -107,5 +170,7 @@ p2r(size){
   margin-top: 5px;
 }
 
-
+// .vux-x-icon {
+//   fill: #d8d8d8;
+// }
 </style>
