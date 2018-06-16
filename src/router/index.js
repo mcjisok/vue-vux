@@ -16,6 +16,9 @@ import NewGroupPage from '@/views/Group/addNewGroup'
 import SettingPage from '@/views/Member/Setting'
 import Drafts from '@/views/Member/Drafts'
 
+// 分组详情页面
+import GroupDetailPage from '@/views/Group/groupDetail'
+
 
 Vue.use(Router)
 
@@ -57,12 +60,18 @@ export default new Router({
           component:GroupPage,          
         },
         {
+          path:'group/:id',
+          name:'GroupDetail',
+          component:GroupDetailPage,          
+        },
+        {
           // 新建分组
           path:'newgroup',
           name:'NewGroup',
           component:NewGroupPage
         },
         {
+          //修改草稿页
           path:'push/:id',
           component:PushPage
         },

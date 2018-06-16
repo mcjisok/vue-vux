@@ -67,13 +67,24 @@
 <script>
 // import liuyanicon from '@/assets/icon/liuyan.png'
 export default {
-    props:[        
-        'pushID',
-        'fromID',//userID   
-        'comment',
-        'pushIndex'  
-
-    ],
+    props:{
+        pushID:{
+            type:String,
+            required:true
+        },
+        fromID:{
+            type:String,
+            required:true
+        },
+        comment:{
+            type:Array,
+            required:false
+        },
+        pushIndex:{
+            type:Number,
+            required:false
+        }
+    },
     directives: {
         focus: {
             update: function (el, {value}) {

@@ -18,7 +18,7 @@
                 </a>
             </div>
         </a>
-        <confirm v-model="confirValue" title="是否保存" @on-confirm="del_drafts(content._id)">
+        <confirm v-model="confirValue" title="是否删除" @on-confirm="del_drafts(content._id)">
             <p style="text-align:center;">确定咩？</p>
         </confirm>
     </div>

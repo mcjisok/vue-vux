@@ -40,17 +40,22 @@
                             </div> -->
                         </div>
 
-                        <Comment :pushID="n._id" :fromID="$store.state.nowLoginUserID" :comment="n.comment" :pushIndex="i" @reply="changePush"></Comment>
+                        <Comment 
+                            :pushID="n._id" 
+                            :fromID="$store.state.nowLoginUserID" 
+                            :comment="n.comment" 
+                            :pushIndex="i" 
+                            @reply="changePush">
+                        </Comment>
 
                     </div>
                 </li>
                 <load-more tip="正在加载" v-if="!loadmoreSW"></load-more>
-                <load-more v-if="!hasMore" :show-loading="hasMore" tip="暂无数据" background-color="#fbf9fe"></load-more>
+                <load-more v-if="!hasMore" :show-loading="hasMore" tip="已经加载完啦~" background-color="#fbf9fe"></load-more>
                 <!-- <li><p @click="loadmore()">加载更多...</p><br></li> -->
                 
             </ul>
         </div>
-        <!-- </scroller> -->
         
     </div>
 </template>
@@ -60,20 +65,23 @@ import { TransferDom } from 'vux'
 import Comment from '@/components/Home/Comment'
 export default {
     name:'pushlist',
+    props:{
+        pushlist:{
+            type: Array
+        },
+        loadingShow:{
+            type:Boolean,
+        },
+        loadmoreSW:{
+            type:Boolean
+        },
+        hasMore:{
+            type:Boolean
+        }
+    },
     data () {
         return {
-            lilength:[1,2,3],
-            
-            page:0,
-            total:0,
-            pushlist:[],
-            hasMore:true,
-            GET_PUSHLIST_API:this.HOST.host + '/getpushlist',   
-
-            loadmoreSW:true,
             host:this.HOST.host,
-
-            loadingShow:true
         }
     },
     // directives: {
@@ -87,76 +95,24 @@ export default {
             console.log(arg)
         },
         show (index) {
-            // console.log(i)
             console.log(index)
             this.$refs.previewer.show(index)
         },
-        loadmore(){
-            // this.lilength.push(1)
-            console.log(this.page)
-            if(this.hasMore){
-                this.page ++;            
-                let _this = this;
-                this.$http.post(this.GET_PUSHLIST_API,{
-                    page:_this.page
-                })
-                .then(res=>{
-                    setTimeout(() => {
-                        // console.log(res)
-                        _this.loadmoreSW = true
-                        _this.total = res.data.toal
-                        _this.hasMore = res.data.hasMore                        
-                        _this.pushlist = _this.pushlist.concat(res.data.pushList)  
-                        _this.loadingShow = false                      
-                    }, 300);
-                    
-                })
-                .catch(err=>{
-
-                })
-            }
-            else{
-                // this.$vux.toast.show({
-                //     text: '没有更多数据啦~~~',
-                //     type:'text'
-                // })
-                _this.loadingShow = false     
-                this.loadmoreSW = !this.loadmoreSW
-            }
-        },
+        
         changePush:function(msg){
             console.log('接收到子组件传出来的数据')
             console.log(msg)
             // this.pushlist[msg.key] = msg.res.data.data
-            this.$set(this.pushlist, msg.key, msg.res.data.data)
+            // console.log(msg)
+            // this.$set(this.pushlist, msg.key, msg.res.data.data)
+            this.$emit('comment',msg)
         }
     },
     beforeMount:function(){
-        // this.loadingShow = true
-        // console.log('未挂载')
+      
     },
     mounted:function () {
-        // this.loadingShow = false
-        // console.log('已挂载')
-        this.loadmore();
-        let _this = this;  
-            // 设置一个开关来避免重负请求数据  
-        this.loadmoreSW = true;  
-        window.addEventListener('scroll',function(){  
-            // console.log(document.documentElement.clientHeight+'-----------'+window.innerHeight); // 可视区域高度  
-            // console.log(document.body.scrollTop); // 滚动高度  
-            // console.log(document.body.offsetHeight); // 文档高度  
-            if(document.body.scrollTop + window.innerHeight >= document.body.offsetHeight && _this.hasMore) {  
-                // console.log(sw);  
-                // 如果开关打开则加载数据  
-                if(_this.loadmoreSW){  
-                    // 将开关关闭 
-                    // console.log(sw) 
-                    _this.loadmoreSW = false;  
-                    _this.loadmore();                    
-                }  
-            }
-        })
+      
     }
     
 }

@@ -11,7 +11,14 @@
             <swiper-item class="black"><h3 class="title fadeInUp animated">而不是只是生存。</h3></swiper-item>
         </swiper>
         <!-- <panel header="我的圈子" :footer="footer" :list="list" :type="type" ></panel> -->
-        <pushlist></pushlist>
+        <pushlist 
+            :pushlist="pushlist" 
+            :loadingShow="loadingShow" 
+            :loadmoreSW="loadmoreSW" 
+            :hasMore="hasMore" 
+            @comment="renewComment">
+        </pushlist>
+
         <div class="navbarbox"></div>
     </div>
 </template>
@@ -28,8 +35,21 @@ export default {
             demo01_index:0,
             isloop:true,
             isauto:true,
-            type:'4',
             
+
+
+            // push数据
+            page:0,
+            total:0,
+            pushlist:[],
+            hasMore:true,
+            loadmoreSW:true,//数据首次加载之前的加载动画
+            loadingShow:true,//页面下拉加载中动画
+
+            //API
+            host:this.HOST.host,
+            GET_PUSHLIST_API:this.HOST.host + '/getpushlist',       
+
         }
     },
     components:{
@@ -41,13 +61,73 @@ export default {
         },
         show:function(){
             console.log(this.a)
+        },
+
+        loadmore(){
+            // this.lilength.push(1)
+            // console.log(this.page)
+            if(this.hasMore){
+                this.page ++;            
+                let _this = this;
+                this.$http.post(this.GET_PUSHLIST_API,{
+                    page:_this.page
+                })
+                .then(res=>{
+                    setTimeout(() => {
+                        // console.log(res)
+                        _this.loadmoreSW = true
+                        _this.total = res.data.toal
+                        _this.hasMore = res.data.hasMore                        
+                        _this.pushlist = _this.pushlist.concat(res.data.pushList)  
+                        _this.loadingShow = false                      
+                    }, 300);
+                    
+                })
+                .catch(err=>{
+
+                })
+            }
+            else{
+                // this.$vux.toast.show({
+                //     text: '没有更多数据啦~~~',
+                //     type:'text'
+                // })
+                _this.loadingShow = false     
+                this.loadmoreSW = !this.loadmoreSW
+            }
+        },
+
+        // 监听pushlist组件的评论是否有变化
+        renewComment:function(res){
+            // console.log('孙子组件传出来的数据为：',res)
+            this.$set(this.pushlist, res.key, res.res.data.data)
         }
+
     },
     computed:mapState({
         a:state => state.nowLoginUsername
     }),
     mounted:function () {
         // this.show();
+        let _this = this;  
+
+        this.loadmore();
+        this.loadmoreSW = true;  
+        window.addEventListener('scroll',function(){  
+            // console.log(document.documentElement.clientHeight+'-----------'+window.innerHeight); // 可视区域高度  
+            // console.log(document.body.scrollTop); // 滚动高度  
+            // console.log(document.body.offsetHeight); // 文档高度  
+            if(document.body.scrollTop + window.innerHeight >= document.body.offsetHeight && _this.hasMore) {  
+                // console.log(sw);  
+                // 如果开关打开则加载数据  
+                if(_this.loadmoreSW){  
+                    // 将开关关闭 
+                    // console.log(sw) 
+                    _this.loadmoreSW = false;  
+                    _this.loadmore();                    
+                }  
+            }
+        })
     }
 }
 </script>
