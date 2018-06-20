@@ -39,7 +39,7 @@
                                 <p>{{item.content}}</p>
                             </div>
 
-                            <div class="replyList" v-for="(n,i) in item.reply.slice(0,3)" :key="i" v-if="item.reply.length > 0">
+                            <div class="replyList" v-for="(n,i) in item.reply.slice(0,maxCommentReply)" :key="i" v-if="item.reply.length > 0">
                                 <div class="reply_content">
                                     <p>
                                         {{n.from.name}} 回复 {{n.to.name}}:{{n.content}}
@@ -79,6 +79,11 @@ export default {
         comment:{
             type:Array,
             required:false
+        },
+        maxCommentReply:{
+            // 最多显示多少条评论 以及从后台每次获取的评论条数
+            type:Number,
+            default:3
         },
         pushIndex:{
             type:Number,
@@ -159,10 +164,11 @@ export default {
                     push:_this.pushID,
                     from:_this.fromID,
                     to:_this.replyToId,
-                    content:_this.commentContent
+                    content:_this.commentContent,
+                    maxCommentReply:_this.maxCommentReply
                 })
                 .then(res=>{
-                    console.log(res)
+                    console.log('保存评论后返回的数据为：',res)
                     // _this.local_comment.unshift(res.data.data)
                     // _this.local_comment = _this.local_comment.slice(0,3)
                    

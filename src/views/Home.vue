@@ -37,6 +37,9 @@ export default {
             if(nowRoute == '/home/member'){
                 return '个人中心'
             }
+            if(nowRoute == '/home/group'){
+                return '分组'
+            }
             else{
                 return 'mcjisok'
             }

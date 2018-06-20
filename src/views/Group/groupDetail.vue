@@ -11,6 +11,7 @@
             :loadingShow="loadingShow" 
             :loadmoreSW="loadmoreSW" 
             :hasMore="hasMore" 
+            :pushListTitle="detail.groupName"
             @comment="renewComment"
             @loadMore="renewPush">
         </pushlist>
@@ -96,8 +97,7 @@ export default {
                         _this.hasMore = res.data.hasMore                        
                         _this.pushlist = _this.pushlist.concat(res.data.pushList)  
                         _this.loadingShow = false                      
-                    }, 300);
-                    
+                    }, 300);                    
                 })
                 .catch(err=>{
 

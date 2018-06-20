@@ -6,7 +6,8 @@ const state = {
     drafts:[],
 
     // group
-    groupID:''
+    groupID:'',
+    groupName:''
 }
 
 export default state

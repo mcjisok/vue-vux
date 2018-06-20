@@ -2,7 +2,7 @@
     <div class="group">
         <div class="topbarbox"></div>  
         <div class="_head">
-            <p>我的分组</p>
+            <p>我的分组 <badge :text="'已加入' + list.length + '个分组'"></badge></p>
         </div>
 
         <div style="margin: 10px;overflow: hidden;" v-for="item in list.slice(0,maxMyGroupLength)" :key="item._id" @click="groupDetail(item._id)">
@@ -27,7 +27,7 @@
         </div>
 
         <div class="_head">
-            <p>热门分组</p>
+            <p>热门分组 <badge text="Top10"></badge></p>
         </div>
 
         <div style="margin: 10px;overflow: hidden;" v-for="(item,index) in hotlist" :key="index" @click="groupDetail(item._id)">
@@ -129,7 +129,7 @@ export default {
         }
         
     },
-    mounted:function(){
+    beforeMount:function(){
         this.getMyGroupList();
         this.getHotGroupList()
     }

@@ -66,7 +66,7 @@ export default {
             firstTagList:[],
             subTagList:[],
 
-            groupID:this.$store.state.groupID.ID,
+            groupID:this.$store.state.groupID.ID !== ''?this.$store.state.groupID.ID:null,
             groupInfo:[],
 
             // api
@@ -184,7 +184,8 @@ export default {
                         text: '发布成功',
                         type:'success',
                         onHide () {                            
-                            _this.$router.push('/home/index')
+                            // _this.$router.push('/home/index')
+                            _this.$router.go(-1)
                         }
                     })
                 }

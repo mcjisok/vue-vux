@@ -7,7 +7,8 @@ import Home from '@/views/Home'
 
 // Home 子路由页面组件引入
 import IndexPage from '@/views/Index'
-import PushPage from '@/views/Push'
+import PushPage from '@/views/Push/Push'
+import PushDetailPage from '@/views/Push/PushDetail'
 import ZonePage from '@/views/Zone'
 import MemberPage from '@/views/Member'
 import GroupPage from '@/views/Group/groupList'
@@ -53,6 +54,11 @@ export default new Router({
           path:'push',
           name:'Push',
           component:PushPage
+        },
+        {
+          path:'pushdetail/:id',
+          name:'PushDetail',
+          component:PushDetailPage
         },
         {
           path:'group',

@@ -2,7 +2,7 @@
     <div class="pushList">
         <!-- <scroller lock-x height="200px" @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" :scroll-bottom-offst="200"> -->
         
-        <div class="pl_head"><p>我的圈子</p></div>
+        <div class="pl_head"><p>#{{pushListTitle}}#</p></div>
         <loading :show="loadingShow" text=""></loading>        
         <div class="pl_content">
             <ul v-if="pushlist.length > 0">
@@ -20,26 +20,26 @@
                             </div>
                             <div class="head_right"></div>
                         </div>
-                        <div class="ctx_warp">
-                            <p class="warp_title">{{n.pushContent}}</p>
-                        </div>
-                        <div class="ctx_img" v-if="n.pushImageList.length > 0">
-                            <!-- <img class="previewer-demo-img" v-for="(item, index) in list" :key="item.src" :src="item.src" width="100" @click="show(index)"> -->
-                            
-                            <ul class="figure-list">
-                                <li v-for="(item, index) in n.pushImageList.slice(0,3)" :key="index">
-                                    <figure v-bind:style="{backgroundImage:'url('+host+item+')'}" class="previewer-demo-img">
-                                        <!-- <a href="#"></a> -->
-                                        <!-- <img src="" alt=""> -->
-                                    </figure>
-                                </li>                            
-                            </ul>
-                             
-                            <!-- <div v-transfer-dom>
-                            <previewer :list="list" ref="previewer" :options="options" @on-index-change="logIndexChange"></previewer>
-                            </div> -->
-                        </div>
-
+                        <router-link :to="'/home/pushdetail/' + n._id">
+                            <div class="ctx_warp">
+                                <p class="warp_title">{{n.pushContent}}</p>
+                            </div>
+                        </router-link>
+                        <router-link :to="'/home/pushdetail/' + n._id">
+                            <div class="ctx_img" v-if="n.pushImageList.length > 0">
+                                <!-- <img class="previewer-demo-img" v-for="(item, index) in list" :key="item.src" :src="item.src" width="100" @click="show(index)"> -->
+                                
+                                <ul class="figure-list">
+                                    <li v-for="(item, index) in n.pushImageList.slice(0,3)" :key="index">
+                                        <figure v-bind:style="{backgroundImage:'url('+host+item+')'}" class="previewer-demo-img">
+                                            <!-- <a href="#"></a> -->
+                                            <!-- <img src="" alt=""> -->
+                                        </figure>
+                                    </li>                            
+                                </ul>
+                                
+                            </div>
+                        </router-link>
                         <Comment 
                             :pushID="n._id" 
                             :fromID="$store.state.nowLoginUserID" 
@@ -55,6 +55,9 @@
                 <!-- <li><p @click="loadmore()">加载更多...</p><br></li> -->
                 
             </ul>
+            <div v-else class="nodata" style="padding-top:100px">
+                <load-more :show-loading="false" tip="暂无数据" background-color="#fbf9fe"></load-more>
+            </div>            
         </div>
         
     </div>
@@ -66,6 +69,10 @@ import Comment from '@/components/Home/Comment'
 export default {
     name:'pushlist',
     props:{
+        pushListTitle:{
+            type:String,
+            default:'我的圈子'
+        },
         pushlist:{
             type: Array
         },
@@ -106,7 +113,11 @@ export default {
             // console.log(msg)
             // this.$set(this.pushlist, msg.key, msg.res.data.data)
             this.$emit('comment',msg)
-        }
+        },
+
+        // goToPushDetail:function(id){
+        //     this.$router.push({ path: '/home/pushdetail', params: { id: 123 }})
+        // }
     },
     beforeMount:function(){
       
@@ -126,6 +137,7 @@ export default {
                     // console.log(sw) 
                     // _this.loadmoreSW = false;  
                     // _this.loadmore();     
+                    // 告知父组件可以加载更多数据
                     _this.$emit('loadMore')               
                 }  
             }
