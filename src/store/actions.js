@@ -18,3 +18,12 @@ export const editPush = ({commit},drafts) =>{
         drafts
     })
 }
+
+
+// 设置groupID
+export const setGroupID = ({commit},ID) =>{
+    commit({
+        type:'setGroupID',
+        ID
+    })
+}

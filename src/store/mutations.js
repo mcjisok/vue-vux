@@ -15,3 +15,8 @@ export const refreshUserinfo = (state,payload) =>{
 export const editPush = (state,payload) =>{
     state.drafts = payload.drafts
 }
+
+// 设置groupID
+export const setGroupID = (state,payload) =>{
+    state.groupID = payload.ID
+}

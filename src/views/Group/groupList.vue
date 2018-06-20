@@ -5,7 +5,7 @@
             <p>我的分组</p>
         </div>
 
-        <div style="margin: 10px;overflow: hidden;" v-for="(item,index) in list.slice(0,maxMyGroupLength)" :key="index" @click="groupDetail(item._id)">
+        <div style="margin: 10px;overflow: hidden;" v-for="item in list.slice(0,maxMyGroupLength)" :key="item._id" @click="groupDetail(item._id)">
             <masker style="border-radius: 3px;" color="64,64,64" :opacity="opacity">
                 <div class="m-img" :style="{backgroundImage: 'url(' +HOST+ item.groupImg + ')'}"></div>
                 <div slot="content" class="m-title">
@@ -21,7 +21,7 @@
         <div class="loadMore"  v-if="groupHasMore">
             <!-- <hr class="hrLine" style="width:20%"/>  XXXXX  <hr class="hrLine" style="width:80%"/> -->
             <divider>
-                <p style="font-size:14px" v-if="downAndUp" @click="groupLoadMore()">更多</x-icon></p>
+                <p style="font-size:14px" v-if="downAndUp" @click="groupLoadMore()">更多</p>
                 <p style="font-size:14px" v-else @click="grouphide()">收起来~</p>
             </divider>
         </div>
@@ -30,7 +30,7 @@
             <p>热门分组</p>
         </div>
 
-        <div style="margin: 10px;overflow: hidden;" v-for="(item,index) in hotlist" :key="item._id" @click="groupDetail(item._id)">
+        <div style="margin: 10px;overflow: hidden;" v-for="(item,index) in hotlist" :key="index" @click="groupDetail(item._id)">
             <masker style="border-radius: 3px;" color="64,64,64" :opacity="opacity">
                 <div class="m-img" :style="{backgroundImage: 'url(' +HOST+ item.groupImg + ')'}"></div>
                 <div slot="content" class="m-title">
@@ -105,7 +105,7 @@ export default {
 
         // 去往分组详情页
         groupDetail:function(id){
-            this.$router.push('/home/group/'+id)
+            this.$router.push('/home/groupdetail/'+id)
         }
             
     },

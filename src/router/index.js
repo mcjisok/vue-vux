@@ -60,7 +60,7 @@ export default new Router({
           component:GroupPage,          
         },
         {
-          path:'group/:id',
+          path:'groupdetail/:id',
           name:'GroupDetail',
           component:GroupDetailPage,          
         },

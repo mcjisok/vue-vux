@@ -3,7 +3,10 @@ const state = {
     nowLoginUsername:'',
     nowLoginName:'',
     nowLoginUserID:'5b0a1ecb459bab08a40e281b',
-    drafts:[]
+    drafts:[],
+
+    // group
+    groupID:''
 }
 
 export default state

@@ -3,6 +3,7 @@
         <x-header :title=pageTitle class="xheader" style="width: 100%; position: fixed; left: 0px; top: 0px; z-index: 100;">
             <a slot="right" @click="routerJumpToPush()" v-if="this.$route.path === '/home/index'">发布动态</a>
             <a slot="right" @click="routerJumpToGroup()" v-if="this.$route.path === '/home/group'">新建分组</a>
+            <a slot="right" @click="routerJumpToPushInGroup()" v-if="this.$route.name == 'GroupDetail'">发布动态</a>
         </x-header>        
         
         <div class="content">
@@ -19,6 +20,7 @@
 
 <script>
 import Navbar from "@/components/Navbar";
+import { mapActions } from 'vuex'
 
 export default {
     data(){
@@ -44,16 +46,23 @@ export default {
         Navbar,
     },
     methods:{
+        ...mapActions([
+            'setGroupID'
+        ]),
         
         show:function(){
             // console.log(this.a)
             this.$router.push('/home/index')
         },
         routerJumpToPush:function(){
+            this.$store.dispatch('setGroupID',{ID:''})
             this.$router.push('/home/push')            
         },
         routerJumpToGroup:function(){
             this.$router.push('/home/newgroup')
+        },
+        routerJumpToPushInGroup:function(){
+            this.$router.push('/home/push')      
         }
     },
     beforeMount:function (){

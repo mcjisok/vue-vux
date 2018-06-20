@@ -16,7 +16,8 @@
             :loadingShow="loadingShow" 
             :loadmoreSW="loadmoreSW" 
             :hasMore="hasMore" 
-            @comment="renewComment">
+            @comment="renewComment"
+            @loadMore="renewPush">
         </pushlist>
 
         <div class="navbarbox"></div>
@@ -87,11 +88,7 @@ export default {
 
                 })
             }
-            else{
-                // this.$vux.toast.show({
-                //     text: '没有更多数据啦~~~',
-                //     type:'text'
-                // })
+            else{                
                 _this.loadingShow = false     
                 this.loadmoreSW = !this.loadmoreSW
             }
@@ -100,7 +97,14 @@ export default {
         // 监听pushlist组件的评论是否有变化
         renewComment:function(res){
             // console.log('孙子组件传出来的数据为：',res)
+            // 并添加新的评论数据
             this.$set(this.pushlist, res.key, res.res.data.data)
+        },
+
+        // 加载更多push
+        renewPush:function(msg){
+            this.loadmoreSW = false;  
+            this.loadmore();   
         }
 
     },
@@ -110,24 +114,23 @@ export default {
     mounted:function () {
         // this.show();
         let _this = this;  
-
         this.loadmore();
-        this.loadmoreSW = true;  
-        window.addEventListener('scroll',function(){  
-            // console.log(document.documentElement.clientHeight+'-----------'+window.innerHeight); // 可视区域高度  
-            // console.log(document.body.scrollTop); // 滚动高度  
-            // console.log(document.body.offsetHeight); // 文档高度  
-            if(document.body.scrollTop + window.innerHeight >= document.body.offsetHeight && _this.hasMore) {  
-                // console.log(sw);  
-                // 如果开关打开则加载数据  
-                if(_this.loadmoreSW){  
-                    // 将开关关闭 
-                    // console.log(sw) 
-                    _this.loadmoreSW = false;  
-                    _this.loadmore();                    
-                }  
-            }
-        })
+        // this.loadmoreSW = true;  
+        // window.addEventListener('scroll',function(){  
+        //     // console.log(document.documentElement.clientHeight+'-----------'+window.innerHeight); // 可视区域高度  
+        //     // console.log(document.body.scrollTop); // 滚动高度  
+        //     // console.log(document.body.offsetHeight); // 文档高度  
+        //     if(document.body.scrollTop + window.innerHeight >= document.body.offsetHeight && _this.hasMore) {  
+        //         // console.log(sw);  
+        //         // 如果开关打开则加载数据  
+        //         if(_this.loadmoreSW){  
+        //             // 将开关关闭 
+        //             // console.log(sw) 
+        //             _this.loadmoreSW = false;  
+        //             _this.loadmore();                    
+        //         }  
+        //     }
+        // })
     }
 }
 </script>

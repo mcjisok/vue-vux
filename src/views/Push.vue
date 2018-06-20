@@ -6,6 +6,7 @@
             <x-textarea :max="200" name="description" :placeholder="textarea_placeholder" v-model="pushContent" ></x-textarea>
             <popup-picker title="一级标签" :data="firstTagList" v-model="firstTag" @on-show="onShow" @on-hide="onHide" @on-change="onChange" placeholder="请选择"></popup-picker>
             <popup-picker popup-title="请选择" title="二级标签" :data="subTagList" v-model="subTag" @on-show="onShow" @on-hide="onHide" @on-change="onChangeSub" placeholder="请选择"></popup-picker>
+            <cell v-if="groupInfo.length !== 0" title="分组" :value="groupInfo.groupName" ></cell>
             <x-switch title="是否存为草稿" v-model="isPush"></x-switch>
         </group>
         <group>
@@ -65,10 +66,14 @@ export default {
             firstTagList:[],
             subTagList:[],
 
+            groupID:this.$store.state.groupID.ID,
+            groupInfo:[],
+
             // api
             uploadPushImgApi:this.HOST.host + '/uploadPushImg',
             savaPushApi:this.HOST.host + '/savePush',
             getTagList:this.HOST.host + '/getTagList',
+            getGroupInfoApi:this.HOST.host + '/getGroupDerail',
             host:this.HOST.host,      
             
         }
@@ -81,9 +86,27 @@ export default {
             else{
                 return ''
             }
-        }
+        },
+        
+        
     },
     methods:{
+        // 判断分组ID是否在全局状态存在，如果存在则获取诗句
+        getGroupInfo(){
+            let _this = this;
+            if(this.groupID !== ''){
+                _this.$http.post(this.getGroupInfoApi,{
+                    _id:_this.groupID
+                })
+                .then(res=>{
+                    console.log('测试是',res)
+                    _this.groupInfo = res.data.groupDetail
+                })
+                .catch(e=>{
+                    console.log(e)
+                })
+            }
+        },
         openFile(){
             this.$refs.file.click();
         },
@@ -142,6 +165,7 @@ export default {
         // 发布新的push动态
         savePush:function(){
             let _this = this
+            console.log('分组ID为！！！！！！！！！！！！！！',this.groupID)
             this.$http.post(this.savaPushApi,{
                 pushTitle:this.pushTitle,
                 pushContent:this.pushContent,
@@ -150,6 +174,7 @@ export default {
                 userID:this.$store.state.nowLoginUserID,
                 pushID:this.pushID,
                 tagID:this.subTag,
+                groupID:this.groupID,
                 meta:{}
             })
             .then(res=>{
@@ -235,6 +260,9 @@ export default {
         if(this.pushID !== ''){
             console.log('修改草稿中')
             this.editPush()
+        }
+        else{
+            this.getGroupInfo()
         }
     }
 }
