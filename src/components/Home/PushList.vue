@@ -215,8 +215,8 @@ p2r(size){
             }
             .ctx_warp{
                 p{
-                    padding 0 p2r(10)
-                    margin-top p2r(15)
+                    // padding 0 p2r(10)
+                    margin-top p2r(10) 0 p2r(15) 0
                     margin-bottom p2r(15)
                     color #999999
                     word-wrap:break-word /* 允许数字字母换行*/

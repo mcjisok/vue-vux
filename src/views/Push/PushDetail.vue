@@ -1,7 +1,7 @@
 <template>
     <div class="pushDetail">
         <div class="topbarbox"></div>
-            <div class="pl_context">
+            <div class="pl_context" v-if="pushDetail !== ''">
                 <div class="ctx_head">
                     <div class="head_left">
                         <div class="pensonal_headimg">
@@ -17,7 +17,7 @@
                 <div class="ctx_warp">
                     <p class="warp_title">{{pushDetail.pushContent}}</p>
                 </div>
-                <div class="ctx_img" v-if="pushDetail.pushImageList.length > 0">
+                <div class="ctx_img" v-if="pushDetail.pushImageList">
                 
                     <ul class="figure-list">
                         <li v-for="(item, index) in pushDetail.pushImageList.slice(0,9)" :key="index" @click="show(index)">
@@ -34,8 +34,8 @@
                 </div>
 
                 <Comment 
-                    :pushID="pushDetail._id" 
-                    :fromID="$store.state.nowLoginUserID" 
+                    :pushID=pushDetail._id
+                    :fromID=$store.state.nowLoginUserID 
                     :comment="pushDetail.comment" 
                     :maxCommentReply=100
                     @reply="changePush">
@@ -55,7 +55,7 @@ export default {
         return {
             host:this.HOST.host,
             pushID:this.$route.params.id,
-            pushDetail:[],
+            pushDetail:'',
 
             // API
             getPushDetailAPI:this.HOST.host + '/getPushDetail',
@@ -98,11 +98,10 @@ export default {
                 _id:this.pushID
             })
             .then(res=>{    
-                    if(res.data.code === 200){
-                        _this.pushDetail = res.data.data
-                        // console.log(_this.pushDetail)
-                        _this.imgArrayToObj(_this.pushDetail.pushImageList)
-                    }
+                if(res.data.code === 200){
+                    _this.pushDetail = res.data.data
+                    _this.imgArrayToObj(_this.pushDetail.pushImageList)
+                }
             })
             .catch(e=>{
                 console.log(e)
