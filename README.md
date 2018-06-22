@@ -2,6 +2,27 @@
  
 > A Vue.js project
 
+## 主要功能
+
+* 页面包括`登录、注册、首页、发布消息页、分组页、个人中心、编辑个人中心、草稿箱`等
+ 
+## 技术栈
+* vue全家桶（vue,vue-router,vuex）
+* axios
+* stylus
+* vuxUI组件
+ 
+## 其他相关
+* [后端github地址](https://github.com/mcjisok/koa2)
+  * 后端基于koa2+mongodb编写
+  
+* [后台管理页面github地址](https://github.com/mcjisok/react-backends)
+  * 后台管理页面采用react+antd编写
+  
+## 部分界面截图
+
+
+
 ## Build Setup
 
 ``` bash
