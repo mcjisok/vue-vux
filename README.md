@@ -20,7 +20,10 @@
   * 后台管理页面采用react+antd编写
   
 ## 部分界面截图
-
+![Screenshot1](https://github.com/mcjisok/vue-vux/blob/master/Screenshot/vue-vux_01.jpg)
+![Screenshot1](https://github.com/mcjisok/vue-vux/blob/master/Screenshot/vue-vux_02.jpg)
+![Screenshot1](https://github.com/mcjisok/vue-vux/blob/master/Screenshot/vue-vux_03.jpg)
+![Screenshot1](https://github.com/mcjisok/vue-vux/blob/master/Screenshot/vue-vux_04.jpg)
 
 
 ## Build Setup
