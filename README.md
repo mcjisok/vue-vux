@@ -25,6 +25,12 @@
 ![Screenshot1](https://github.com/mcjisok/vue-vux/blob/master/Screenshot/vue-vux_03.jpg)
 ![Screenshot1](https://github.com/mcjisok/vue-vux/blob/master/Screenshot/vue-vux_04.jpg)
 
+## 后续功能
+- [ ] Token
+- [ ] 设置cookie
+- [ ] 成员申请加入分组功能、处理申请功能
+- [ ] 代码分割，路由懒加载
+
 
 ## Build Setup
 
