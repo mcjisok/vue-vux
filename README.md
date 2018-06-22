@@ -1,5 +1,5 @@
-# vue180511
-
+# 一个基于vue全家桶编写的小型社交网站
+ 
 > A Vue.js project
 
 ## Build Setup
