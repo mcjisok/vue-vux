@@ -3,25 +3,25 @@
         <ul>
             <li>
                 <router-link to="/home/index">
-                <img v-if="nowRouterPath=='/home/index'" src="../assets/icon/home1.png" alt="">
-                <img v-else src="../assets/icon/home.png" alt="">
+                <img v-if="nowRouterPath=='/home/index'" src="../assets/icon/home.svg" alt="">
+                <img v-else src="../assets/icon/home.svg" alt="">
                 </router-link>
             </li>
             <li>
                 <router-link to="/home/group">
-                <img v-if="nowRouterPath=='/home/group'" src="../assets/icon/msg21.png" alt="">
-                <img v-else src="../assets/icon/msg2.png" alt="">
+                <img v-if="nowRouterPath=='/home/group'" src="../assets/icon/find.svg" alt="">
+                <img v-else src="../assets/icon/find.svg" alt="">
                 </router-link>
             </li>
             <li>
                 <router-link to="/register">
-                <img src="../assets/icon/news.png" alt="">
+                <img src="../assets/icon/focus.svg" alt="">
                 </router-link>
             </li>
             <li>
                 <router-link to="/home/member">
-                <img v-if="nowRouterPath=='/home/member'" src="../assets/icon/userinfo1.png" alt="">
-                <img v-else src="../assets/icon/userinfo.png" alt="">
+                <img v-if="nowRouterPath=='/home/member'" src="../assets/icon/member.svg" alt="">
+                <img v-else src="../assets/icon/member.svg" alt="">
                 </router-link>
             </li>
             <!-- <li><router-link to="/shopping_cart"><img src="../assets/icon/1 (1).png" alt=""></router-link></li> -->

@@ -138,6 +138,9 @@ export default {
         
     },
     mounted:function(){
+        window.onload = function(){
+            alert(123213213)
+        }
     },
 }
 </script>
