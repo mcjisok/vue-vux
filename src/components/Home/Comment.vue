@@ -73,8 +73,7 @@ export default {
             required:true
         },
         fromID:{
-            type:String,
-            required:true
+            type:String
         },
         comment:{
             type:Array,

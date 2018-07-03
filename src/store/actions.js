@@ -27,3 +27,10 @@ export const setGroupID = ({commit},ID) =>{
         ID
     })
 }
+
+// 用户注销
+export const logOut = ({commit})=>{
+    commit({
+        type:'logOut'
+    })
+}

@@ -23,6 +23,8 @@
 
 <script>
 import { mapActions } from 'vuex'
+import Storge from '../assets/commonjs/SetLocalStorge'
+import { userInfo } from 'os';
 export default {
     data(){
         return{
@@ -73,8 +75,9 @@ export default {
                                 console.log('登录成功之后改变state.loginuserid'+res.data)
                                 // _self.changeLogin()
                                 console.log(res.data)
-                                _self.$store.dispatch('changeLogin',res.data)
-                                _self.$router.push('/home')
+                                Storge.set('userInfo',res.data.userinfo)        //设置本地客户端localstorge
+                                _self.$store.dispatch('changeLogin',res.data)   //设置vuex全局状态
+                                _self.$router.push('/home')                     //路由跳转至首页
                             }
                         })
                         break;

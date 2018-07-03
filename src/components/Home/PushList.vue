@@ -11,7 +11,7 @@
                         <div class="ctx_head">
                             <div class="head_left">
                                 <div class="pensonal_headimg">
-                                    <img :src="host + n.userID.userInfoPhoto" alt="" width="80%">
+                                    <img :src="n.userID.userInfoPhoto?host + n.userID.userInfoPhoto:'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=164802939,3427154249&fm=27&gp=0.jpg'" alt="" width="80%">
                                 </div>
                                 <div class="push_info">
                                     <p>{{n.userID.name}}</p>

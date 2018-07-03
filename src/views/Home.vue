@@ -4,6 +4,7 @@
             <a slot="right" @click="routerJumpToPush()" v-if="this.$route.path === '/home/index'">发布动态</a>
             <a slot="right" @click="routerJumpToGroup()" v-if="this.$route.path === '/home/group'">新建分组</a>
             <a slot="right" @click="routerJumpToPushInGroup()" v-if="this.$route.name == 'GroupDetail'">发布动态</a>
+            <a slot="right" @click="userLogOut()" v-if="this.$route.path == '/home/member'">注销</a>
         </x-header>        
         
         <div class="content">
@@ -50,7 +51,7 @@ export default {
     },
     methods:{
         ...mapActions([
-            'setGroupID'
+            'setGroupID','logOut'
         ]),
         
         show:function(){
@@ -66,6 +67,9 @@ export default {
         },
         routerJumpToPushInGroup:function(){
             this.$router.push('/home/push')      
+        },
+        userLogOut:function(){
+            this.$store.dispatch('logOut')
         }
     },
     beforeMount:function (){

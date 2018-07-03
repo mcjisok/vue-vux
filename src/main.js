@@ -5,6 +5,8 @@ import App from './App'
 import router from './router'
 import store from './store/index'
 
+import Storge from './assets/commonjs/SetLocalStorge'
+
 Vue.config.productionTip = false
 
 import { Group, XInput, XButton, Flexbox, FlexboxItem, Tabbar, TabbarItem, XHeader, Swiper, SwiperItem,Panel, Alert, XTextarea, Cell, XImg, Spinner, Icon, XSwitch, Previewer, Scroller, LoadMore, Confirm, Loading, PopupPicker, Masker,Divider,Badge,TransferDom} from 'vux'
@@ -65,9 +67,21 @@ router.beforeEach((to, from, next) => {
   if (to.path === '/login') {
     console.log('登录页')
     console.log(store.state.isLogin)
+    console.log('localstorge是否有存储',Storge.get('userInfo'))
+    let user = Storge.get('userInfo')
+    console.log('2')
+    if(user!==null){
+      store.dispatch('changeLogin',user)
+      router.push('/home/index')
+      console.log('3')
+      console.log(store.state.isLogin)
+      next()
+    }
+    console.log('4')
     next()
   }
   else if (store.state.isLogin === false){
+    console.log('1')
     router.push('/login')
     next()
   }
