@@ -5,7 +5,7 @@
                 <div class="ctx_head">
                     <div class="head_left">
                         <div class="pensonal_headimg">
-                            <img :src="host + pushDetail.userID.userInfoPhoto" alt="" width="80%">
+                            <img :src="pushDetail.userID.userInfoPhoto !== ''?host + pushDetail.userID.userInfoPhoto:defaultTX" alt="" width="80%">
                         </div>
                         <div class="push_info">
                             <p>{{pushDetail.userID.name}}</p>
@@ -50,6 +50,8 @@
 <script>
 import Comment from '@/components/Home/Comment'
 import { Previewer, TransferDom } from 'vux'
+import defaultTX from '@/assets/default.jpg'
+
 export default {
     data () {
         return {
@@ -77,7 +79,10 @@ export default {
                 // Good guide on how to get element coordinates:
                 // http://javascript.info/tutorial/coordinates
                 }
-            }
+            },
+
+
+            defaultTX:defaultTX,//默认头像图片
 
             
         }
@@ -149,7 +154,9 @@ export default {
 p2r(size){
     size/32 * 1rem
 }
-
+.navbarbox{
+    height: p2r(85);
+}
 .pl_context{
     border-bottom 3px solid #f3f4f6
     p{

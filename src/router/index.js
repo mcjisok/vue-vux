@@ -53,7 +53,10 @@ export default new Router({
         {
           path:'push',
           name:'Push',
-          component:PushPage
+          component:PushPage,
+          meta:{
+            requiresAuth:true
+          }
         },
         {
           path:'pushdetail/:id',
@@ -74,12 +77,18 @@ export default new Router({
           // 新建分组
           path:'newgroup',
           name:'NewGroup',
-          component:NewGroupPage
+          component:NewGroupPage,
+          meta:{
+            requiresAuth:true
+          }
         },
         {
           //修改草稿页
           path:'push/:id',
-          component:PushPage
+          component:PushPage,
+          meta:{
+            requiresAuth:true
+          }
         },
         {
           path:'zone',
@@ -89,17 +98,26 @@ export default new Router({
         {
           path:'member',
           name:'Member',
-          component:MemberPage
+          component:MemberPage,
+          meta:{
+            requiresAuth:true
+          }
         },
         {
           path:'setting',
           name:'Setting',
-          component:SettingPage
+          component:SettingPage,
+          meta:{
+            requiresAuth:true
+          }
         },
         {
           path:'drafts',
           name:'Drafts',
-          component: Drafts
+          component: Drafts,
+          meta:{
+            requiresAuth:true
+          }
         }
 
       ]

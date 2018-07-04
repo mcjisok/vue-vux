@@ -64,11 +64,12 @@ Vue.prototype.HOST = global_
 // 路由守卫
 
 router.beforeEach((to, from, next) => {
-  if (to.path === '/login') {
+  if (to.path === '/login' || to.meta.requireAuth) {
     console.log('登录页')
     console.log(store.state.isLogin)
     console.log('localstorge是否有存储',Storge.get('userInfo'))
     let user = Storge.get('userInfo')
+    let token = Storge.get('token')
     console.log('2')
     if(user!==null){
       store.dispatch('changeLogin',user)

@@ -22,6 +22,7 @@
 <script>
 import Navbar from "@/components/Navbar";
 import { mapActions } from 'vuex'
+import Storge from '../assets/commonjs/SetLocalStorge'
 
 export default {
     data(){
@@ -68,8 +69,10 @@ export default {
         routerJumpToPushInGroup:function(){
             this.$router.push('/home/push')      
         },
-        userLogOut:function(){
+        userLogOut:function(){              //注销
             this.$store.dispatch('logOut')
+            Storge.remove('userInfo')        //删除本地客户端localstorge
+            this.$router.push('/login')
         }
     },
     beforeMount:function (){

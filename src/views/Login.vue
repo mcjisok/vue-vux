@@ -72,12 +72,13 @@ export default {
                             text: '登录成功',
                             type:'success',
                             onHide () {
-                                console.log('登录成功之后改变state.loginuserid'+res.data)
+                                console.log('登录成功之后改变state.loginuserid',res.data.userinfo)
                                 // _self.changeLogin()
                                 console.log(res.data)
-                                Storge.set('userInfo',res.data.userinfo)        //设置本地客户端localstorge
-                                _self.$store.dispatch('changeLogin',res.data)   //设置vuex全局状态
-                                _self.$router.push('/home')                     //路由跳转至首页
+                                Storge.set('userInfo',res.data.userinfo)                     //设置本地客户端localstorge
+                                Storge.set('token',res.data.token)                           //设置本地客户端localstorge
+                                _self.$store.dispatch('changeLogin',res.data.userinfo)       //设置vuex全局状态
+                                _self.$router.push('/home')                                  //路由跳转至首页
                             }
                         })
                         break;

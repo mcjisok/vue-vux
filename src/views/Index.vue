@@ -2,20 +2,23 @@
     <div class="indexPage">
         <div class="topbarbox"></div>            
         <!-- <swiper :list="demo01_list" v-model="demo01_index" :loop="isloop" :auto="isauto"></swiper> -->
-        <swiper auto height="100px">
-            <swiper-item class="black"><h3 class="title fadeInUp animated">人是情感动物</h3></swiper-item>
+        <swiper auto height="auto">
+            <!-- <swiper-item class="black"><h3 class="title fadeInUp animated">人是情感动物</h3></swiper-item>
             <swiper-item class="black"><h3 class="title fadeInUp animated">当你觉得你的生活枯燥无味时</h3></swiper-item>
             <swiper-item class="black"><h3 class="title fadeInUp animated">或许是因为你的生活没了“仪式感”</h3></swiper-item>
             <swiper-item class="black"><h3 class="title fadeInUp animated">仪式感是为了让你觉得</h3></swiper-item>
             <swiper-item class="black"><h3 class="title fadeInUp animated">你是在生活</h3></swiper-item>
-            <swiper-item class="black"><h3 class="title fadeInUp animated">而不是只是生存。</h3></swiper-item>
+            <swiper-item class="black"><h3 class="title fadeInUp animated">而不是只是生存。</h3></swiper-item> -->
+            <swiper-item class="black">
+                <img src="https://img.zcool.cn/community/01b2345b31bef8a80121b994f5d921.jpg@1280w_1l_2o_100sh.webp" width="100%" class="title fadeInUp animated"/>
+            </swiper-item>
         </swiper>
         <!-- <panel header="我的圈子" :footer="footer" :list="list" :type="type" ></panel> -->
         <pushlist 
-            :pushlist="pushlist" 
-            :loadingShow="loadingShow" 
-            :loadmoreSW="loadmoreSW" 
-            :hasMore="hasMore" 
+            :pushlist="pushlist"
+            :loadingShow="loadingShow"
+            :loadmoreSW="loadmoreSW"
+            :hasMore="hasMore"
             @comment="renewComment"
             @loadMore="renewPush">
         </pushlist>
@@ -74,6 +77,7 @@ export default {
                     page:_this.page
                 })
                 .then(res=>{
+                    // console.log('111111111111111111',res)
                     setTimeout(() => {
                         // console.log(res)
                         _this.loadmoreSW = true

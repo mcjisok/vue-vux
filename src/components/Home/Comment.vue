@@ -20,7 +20,7 @@
                         <div class="cl_con" v-for="(item,i) in local_comment" :key="i">
                             <div class="userInfo">
                                 <div class="InfoImg">
-                                    <img :src="host + item.from.userInfoPhoto" alt="" width="30" height="30">
+                                    <img :src="item.from.userInfoPhoto?host + item.from.userInfoPhoto:defaultTXimg" alt="" width="30" height="30">
                                 </div>
 
                                 <div class="InfoName">
@@ -66,6 +66,8 @@
 
 <script>
 // import liuyanicon from '@/assets/icon/liuyan.png'
+import defaultTX from '@/assets/default.jpg'
+
 export default {
     props:{
         pushID:{
@@ -122,9 +124,9 @@ export default {
 
             // API
             saveCommentAPI:this.HOST.host + '/saveComment',
-            host:this.HOST.host
+            host:this.HOST.host,
             
-
+            defaultTXimg:defaultTX
         }
     },
     computed:{
