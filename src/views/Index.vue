@@ -2,7 +2,7 @@
     <div class="indexPage">
         <div class="topbarbox"></div>            
         <!-- <swiper :list="demo01_list" v-model="demo01_index" :loop="isloop" :auto="isauto"></swiper> -->
-        <swiper auto height="auto">
+        <swiper auto :aspect-ratio="296/640">
             <!-- <swiper-item class="black"><h3 class="title fadeInUp animated">人是情感动物</h3></swiper-item>
             <swiper-item class="black"><h3 class="title fadeInUp animated">当你觉得你的生活枯燥无味时</h3></swiper-item>
             <swiper-item class="black"><h3 class="title fadeInUp animated">或许是因为你的生活没了“仪式感”</h3></swiper-item>
@@ -10,7 +10,13 @@
             <swiper-item class="black"><h3 class="title fadeInUp animated">你是在生活</h3></swiper-item>
             <swiper-item class="black"><h3 class="title fadeInUp animated">而不是只是生存。</h3></swiper-item> -->
             <swiper-item class="black">
-                <img src="https://img.zcool.cn/community/01b2345b31bef8a80121b994f5d921.jpg@1280w_1l_2o_100sh.webp" width="100%" class="title fadeInUp animated"/>
+                <img :src="img1" width="100%" class="title fadeInUp animated"/>
+            </swiper-item>
+            <swiper-item class="black">
+                <img :src="img2" width="100%" class="title fadeInUp animated"/>
+            </swiper-item>
+            <swiper-item class="black">
+                <img :src="img3" width="100%" class="title fadeInUp animated"/>
             </swiper-item>
         </swiper>
         <!-- <panel header="我的圈子" :footer="footer" :list="list" :type="type" ></panel> -->
@@ -30,6 +36,9 @@
 <script>
 import { mapState } from 'vuex'
 import PushList from '@/components/Home/PushList'
+import img1 from '@/assets/1.jpg'
+import img2 from '@/assets/2.jpg'
+import img3 from '@/assets/3.jpg'
 
 export default {
     data(){
@@ -53,6 +62,10 @@ export default {
             //API
             host:this.HOST.host,
             GET_PUSHLIST_API:this.HOST.host + '/getpushlist',       
+
+            img1:img1,
+            img2:img2,
+            img3:img3,
 
         }
     },

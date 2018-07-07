@@ -2,17 +2,21 @@
     <div class="drafts_con">
         <div class="topbarbox"></div>       
             <!-- <panel header="草稿箱(点击可编辑)" :list="list" type="1" ></panel>                  -->
-            <ul>
+            <ul v-if="draftsList.length > 0">
                 <li v-for="(items,index) in draftsList" :key="index">
                     <Drafts :content="items" @reloadDraftsList="getDraftsList"></Drafts>
                 </li>
             </ul>
+            <div v-else class="nodata">
+                <img :src="nodataimg" width="100%"/>
+            </div>
         <div class="navbarbox"></div>
     </div>
 </template>
 
 <script>
 import Drafts from '@/components/Drafts'
+import nodataimg from '@/assets/nodata.png'
 export default {
     data(){
         return{
@@ -21,6 +25,8 @@ export default {
             getDraftsListAPI:this.HOST.host + '/getDraftsList',
             list: [],
             draftsList:[],
+
+            nodataimg:nodataimg
         }
     },
     components:{
@@ -60,5 +66,14 @@ p2r(size){
             border-bottom 1px solid #f3f4f6
         }
     }
+}
+
+.nodata{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 30%;
+    width: 50%;
+    margin: -15% 0 0 -25%;
 }
 </style>

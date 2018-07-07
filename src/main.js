@@ -51,7 +51,9 @@ import  { ConfirmPlugin } from 'vux'
 Vue.use(ConfirmPlugin)
 
 
-import axios from 'axios'
+// import axios from 'axios'
+// 引入经过二次封装的axios
+import axios from '@/serverAxios/index'
 Vue.prototype.$http = axios;  
 
 // 引入时间格式化插件moment 
