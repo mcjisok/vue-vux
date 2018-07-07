@@ -16,6 +16,7 @@ import NewGroupPage from '@/views/Group/addNewGroup'
 // 个人中心子页面
 import SettingPage from '@/views/Member/Setting'
 import Drafts from '@/views/Member/Drafts'
+import About from '@/views/AboutMe'
 
 // 分组详情页面
 import GroupDetailPage from '@/views/Group/groupDetail'
@@ -24,6 +25,7 @@ import GroupDetailPage from '@/views/Group/groupDetail'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -33,12 +35,18 @@ export default new Router({
     {
       path:'/login',
       name:'Login',
-      component:Login
+      component:Login,
+      meta:{
+        title:'登录'
+      }
     },
     {
       path:'/register',
       name:'Register',
-      component: Register
+      component: Register,
+      meta:{
+        title:'注册'
+      }
     },
     {
       path:'/home',
@@ -48,30 +56,46 @@ export default new Router({
         {
           path: 'index',
           name: 'Index',
-          component: IndexPage
+          component: IndexPage,
+          meta:{
+            title:'首页',
+            keepAlive:true
+          }
         },
         {
           path:'push',
           name:'Push',
           component:PushPage,
           meta:{
-            requiresAuth:true
+            title:'发布动态',
+            requiresAuth:true,
           }
         },
         {
           path:'pushdetail/:id',
           name:'PushDetail',
-          component:PushDetailPage
+          component:PushDetailPage,
+          meta:{
+            requiresAuth:true
+          }
         },
         {
           path:'group',
           name:'Group',
-          component:GroupPage,          
+          component:GroupPage,
+          meta:{
+            title:'分组',
+            requiresAuth:true,
+            keepAlive:true
+          }          
         },
         {
           path:'groupdetail/:id',
           name:'GroupDetail',
-          component:GroupDetailPage,          
+          component:GroupDetailPage,    
+          meta:{
+            requiresAuth:true
+          }      
         },
         {
           // 新建分组
@@ -79,6 +103,7 @@ export default new Router({
           name:'NewGroup',
           component:NewGroupPage,
           meta:{
+            title:'新建分组',
             requiresAuth:true
           }
         },
@@ -100,6 +125,7 @@ export default new Router({
           name:'Member',
           component:MemberPage,
           meta:{
+            title:'个人中心',
             requiresAuth:true
           }
         },
@@ -108,6 +134,7 @@ export default new Router({
           name:'Setting',
           component:SettingPage,
           meta:{
+            title:'设置',
             requiresAuth:true
           }
         },
@@ -116,10 +143,19 @@ export default new Router({
           name:'Drafts',
           component: Drafts,
           meta:{
+            title:'草稿箱',
             requiresAuth:true
           }
-        }
-
+        },
+        {
+          path:'about',
+          name:'About',
+          component: About,
+          meta:{
+            title:'关于我们',
+            requiresAuth:true
+          }
+        },
       ]
     }
   ]

@@ -24,7 +24,7 @@
                 <cell title="编辑资料" is-link link="/home/setting">
                     <img slot="icon" width="20" style="display:block;margin-right:5px;" src="../assets/icon/setting.png">
                 </cell>
-                <cell title="关于我们" is-link>
+                <cell title="关于我们" is-link link="/home/about">
                     <img slot="icon" width="20" style="display:block;margin-right:5px;" src="../assets/icon/about.png"
                 >
                 </cell>                

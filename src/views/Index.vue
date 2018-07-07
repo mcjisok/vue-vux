@@ -97,7 +97,7 @@ export default {
                         _this.total = res.data.toal
                         _this.hasMore = res.data.hasMore                        
                         _this.pushlist = _this.pushlist.concat(res.data.pushList)  
-                        _this.loadingShow = false                      
+                        _this.loadingShow = false       
                     }, 300);
                     
                 })

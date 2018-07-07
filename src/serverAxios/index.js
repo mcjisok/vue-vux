@@ -2,7 +2,8 @@
 
 import axios from 'axios'
 import Storge from '../assets/commonjs/SetLocalStorge'
-
+import { AlertModule } from 'vux'
+import router from '@/router'
 
 axios.interceptors.request.use(
     config => {
@@ -23,21 +24,27 @@ axios.interceptors.response.use(
       return response;
     },
     error => {
-      if (error.response.status === 401) {
-        Vue.prototype.$msgBox.showMsgBox({
-          title: '错误提示',
-          content: '您的登录信息已失效，请重新登录',
-          isShowCancelBtn: false
-        }).then((val) => {
-          router.push('/login');
-        }).catch(() => {
-          console.log('cancel');
-        });
+      if (error.response.status === 401 || error.response.status === 400) {
+        console.log(error.response.status)
+        AlertModule.show({
+          title: '请重新登录',
+          content: '认证失效 请重新登录',
+          onShow () {
+          },
+          onHide () {
+            router.push('/login')
+          }
+        })
       } else {
-        Vue.prototype.$message.showMessage({
-          type: 'error',
-          content: '系统出现错误'
-        });
+        AlertModule.show({
+          title: '系统出错',
+          content: '系统出错，请稍后再试',
+          onShow () {
+          },
+          onHide () {
+            router.push('/login')
+          }
+        })
       }
       return Promise.reject(error);
     }

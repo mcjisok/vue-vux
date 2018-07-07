@@ -6,7 +6,7 @@
             <x-textarea :max="200" name="description" :placeholder="textarea_placeholder" v-model="pushContent" ></x-textarea>
             <popup-picker title="一级标签" :data="firstTagList" v-model="firstTag" @on-show="onShow" @on-hide="onHide" @on-change="onChange" placeholder="请选择"></popup-picker>
             <popup-picker popup-title="请选择" title="二级标签" :data="subTagList" v-model="subTag" @on-show="onShow" @on-hide="onHide" @on-change="onChangeSub" placeholder="请选择"></popup-picker>
-            <cell v-if="groupInfo.length !== 0" title="分组" :value="groupInfo.groupName" ></cell>
+            <cell v-if="groupInfo !== undefined" title="分组" :value="groupInfo.groupName" ></cell>
             <x-switch title="是否存为草稿" v-model="isPush"></x-switch>
         </group>
         <group>
@@ -73,7 +73,7 @@ export default {
             uploadPushImgApi:this.HOST.host + '/uploadPushImg',
             savaPushApi:this.HOST.host + '/savePush',
             getTagList:this.HOST.host + '/getTagList',
-            getGroupInfoApi:this.HOST.host + '/getGroupDerail',
+            getGroupInfoApi:this.HOST.host + '/getGroupDetail',
             host:this.HOST.host,      
             
         }
@@ -91,7 +91,7 @@ export default {
         
     },
     methods:{
-        // 判断分组ID是否在全局状态存在，如果存在则获取诗句
+        // 判断分组ID是否在全局状态存在，如果存在则获取数据
         getGroupInfo(){
             let _this = this;
             if(this.groupID !== ''){

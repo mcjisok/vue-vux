@@ -31,7 +31,7 @@ export default {
             username:'',
             userpwd:'',
             required:true,
-            login_url:this.HOST.host + '/login'
+            login_url:this.HOST.host + '/api/login'
         }
     },
     methods:{
@@ -52,7 +52,7 @@ export default {
         login:function(){
             // console.log('点击登录按钮有反应')
             let _self = this;
-            this.$http.post(''+this.HOST.host+'/login',{
+            this.$http.post(this.login_url,{
                 username:this.username,
                 userpassword:this.userpwd
             })
@@ -96,7 +96,6 @@ export default {
         }
     },
     mounted:function () {
-        this.test();
     }
 }
 </script>

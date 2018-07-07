@@ -12,7 +12,10 @@
             <swiper :list="demo01_list" v-model="demo01_index" :loop="isloop" :auto="isauto"></swiper>
             <panel header="我的圈子" :footer="footer" :list="list" :type="type" ></panel>
             <div class="navbarbox"></div> -->
-            <router-view></router-view>
+            <keep-alive>
+                <router-view v-if="$route.meta.keepAlive"></router-view>
+            </keep-alive>
+            <router-view v-if="!$route.meta.keepAlive"></router-view>
         </div>
         
         <Navbar></Navbar>
@@ -32,19 +35,20 @@ export default {
     },
     computed:{
         pageTitle:function(){
-            let nowRoute = this.$route.path;
-            if(nowRoute == '/home/index'){
-                return '首页'
-            }
-            if(nowRoute == '/home/member'){
-                return '个人中心'
-            }
-            if(nowRoute == '/home/group'){
-                return '分组'
-            }
-            else{
-                return 'mcjisok'
-            }
+            return this.$route.meta.title
+            // let nowRoute = this.$route.path;
+            // if(nowRoute == '/home/index'){
+            //     return '首页'
+            // }
+            // if(nowRoute == '/home/member'){
+            //     return '个人中心'
+            // }
+            // if(nowRoute == '/home/group'){
+            //     return '分组'
+            // }
+            // else{
+            //     return 'mcjisok'
+            // }
         }
     },
     components:{
