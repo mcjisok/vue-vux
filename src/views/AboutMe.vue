@@ -5,6 +5,13 @@
             <img :src="logo" alt="" width="100%">
             <p>版本:v1.0</p>
         </div>
+        <group>
+        <cell title="官方微信" value="m101flymer"></cell>
+        <cell title="官方网址" value="www.flymer.net"></cell>
+        <cell title="客服QQ" value="353750533"></cell>
+        <cell title="版权所有" value="Copyright 2018 by mcj"></cell>
+        </group>
+
         <div class="navbarbox"></div>
     </div>
 </template>
@@ -28,9 +35,7 @@ p2r(size){
 .about{
     .logo{
         width p2r(300)
-        margin-left auto 
-        margin-right auto
-        margin-top p2r(200)
+        margin p2r(200) auto p2r(100) auto
     }
     p{
         text-align center

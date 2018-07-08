@@ -11,7 +11,7 @@
                     <span slot="title" style="color:green;"><span style="vertical-align:middle;">消息</span> <badge text="1"></badge></span>
                     <img slot="icon" width="20" style="display:block;margin-right:5px;" src="../assets/icon/msg.png">                    
                 </cell>
-                <cell title="我的圈子" is-link>
+                <cell title="我的动态" is-link>
                     <img slot="icon" width="20" style="display:block;margin-right:5px;" src="../assets/icon/tag.png">
                 </cell>
                 <cell is-link link="/home/drafts">

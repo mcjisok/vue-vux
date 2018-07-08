@@ -14,7 +14,7 @@
                 </router-link>
             </li>
             <li>
-                <router-link to="/register">
+                <router-link to="/home/search">
                 <img src="../assets/icon/focus.svg" alt="">
                 </router-link>
             </li>

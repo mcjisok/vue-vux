@@ -21,6 +21,9 @@ import About from '@/views/AboutMe'
 // 分组详情页面
 import GroupDetailPage from '@/views/Group/groupDetail'
 
+// 搜索页面
+import SearchPage from '@/views/Search'
+
 
 Vue.use(Router)
 
@@ -88,6 +91,16 @@ export default new Router({
             requiresAuth:true,
             keepAlive:true
           }          
+        },
+        // 搜索页面
+        {
+          path:'search',
+          name:'Search',
+          component:SearchPage,
+          meta:{
+            title:'搜索',
+            requiresAuth:true,
+          }
         },
         {
           path:'groupdetail/:id',
