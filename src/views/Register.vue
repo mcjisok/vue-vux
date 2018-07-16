@@ -28,7 +28,7 @@ export default {
             username:'',
             userpwd:'',
             required:true,
-            reg_url: this.HOST.host + '/api/register',
+            reg_url: this.HOST.host + '/register',
         }
     },
     methods:{

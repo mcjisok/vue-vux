@@ -71,24 +71,20 @@ import defaultTX from '@/assets/default.jpg'
 export default {
     props:{
         pushID:{
-            type:String,
-            required:true
+            type:String
         },
         fromID:{
             type:String
         },
         comment:{
-            type:Array,
-            required:false
+            type:Array
         },
         maxCommentReply:{
             // 最多显示多少条评论 以及从后台每次获取的评论条数
-            type:Number,
-            default:3
+            type:Number
         },
         pushIndex:{
-            type:Number,
-            required:false
+            type:Number
         }
     },
     directives: {

@@ -2,9 +2,16 @@
     <div class="search">
         <div class="topbarbox"></div>
 
-
+        <div>
+            <tab :active-color="color">
+                <tab-item selected @on-item-click="onItemClick">标签</tab-item>
+                <tab-item @on-item-click="onItemClick">分组</tab-item>
+                <tab-item @on-item-click="onItemClick">用户</tab-item>
+                <tab-item @on-item-click="onItemClick">动态</tab-item>
+            </tab>
+        </div>
         <section class="search_input">
-            <input type="search" placeholder="请输入关键词" v-model="searchContent" onsearch="searchPush()">
+            <input type="search" :placeholder="searchPlaceholder" v-model="searchContent" onsearch="searchPush()">
         </section>
 
         <div class="navbarbox"></div>
@@ -15,12 +22,40 @@
 export default {
     data(){
         return{
-            searchContent:''
+            // tab样式
+            color:'#66cccc',
+            searchContent:'',
+
+            currentTab:0
         }
+    },
+    computed:{
+        searchPlaceholder:function(){
+            switch (this.currentTab)
+            {
+                case 0:
+                return '请输入标签名称'
+                break;
+                case 1:
+                return '请输入分组名称'
+                break;
+                case 2:            
+                return '请输入用户名称'
+                break;
+                case 3:
+                return '请输入动态内容'
+                break;
+            }
+        }
+        
+        
     },
     methods:{
         searchPush:function(){
             
+        },
+        onItemClick:function(e){
+            this.currentTab = e
         }
     }
 }
@@ -33,9 +68,8 @@ p2r(size){
 
 .search_input{
     width 100%
-    height 30px
     margin 0 auto
-    padding 0 p2r(20)
+    padding p2r(20)
     input[type=search] {
         -webkit-appearance: textfield;
     }

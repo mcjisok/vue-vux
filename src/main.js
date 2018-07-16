@@ -9,7 +9,7 @@ import Storge from './assets/commonjs/SetLocalStorge'
 
 Vue.config.productionTip = false
 
-import { Group, XInput, XButton, Flexbox, FlexboxItem, Tabbar, TabbarItem, XHeader, Swiper, SwiperItem,Panel, Alert, XTextarea, Cell, XImg, Spinner, Icon, XSwitch, Previewer, Scroller, LoadMore, Confirm, Loading, PopupPicker, Masker,Divider,Badge,TransferDom} from 'vux'
+import { Group, XInput, XButton, Flexbox, FlexboxItem, Tabbar, TabbarItem, XHeader, Swiper, SwiperItem,Panel, Alert, XTextarea, Cell, XImg, Spinner, Icon, XSwitch, Previewer, Scroller, LoadMore, Confirm, Loading, PopupPicker, Masker,Divider,Badge,TransferDom, Tab, TabItem} from 'vux'
 
 Vue.component('group', Group)
 Vue.component('x-input', XInput)
@@ -39,6 +39,9 @@ Vue.component('masker', Masker)
 Vue.component('divider', Divider)
 Vue.component('badge', Badge)
 Vue.directive('transfer-dom', TransferDom)
+
+Vue.component('tab', Tab)
+Vue.component('tab-item', TabItem)
 
 // vux以插件形式引入
 import { AlertPlugin } from 'vux'

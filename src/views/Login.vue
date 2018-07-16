@@ -31,7 +31,7 @@ export default {
             username:'',
             userpwd:'',
             required:true,
-            login_url:this.HOST.host + '/api/login'
+            login_url:this.HOST.host + '/login'
         }
     },
     methods:{

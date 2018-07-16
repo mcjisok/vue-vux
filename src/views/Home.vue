@@ -76,6 +76,7 @@ export default {
         userLogOut:function(){              //注销
             this.$store.dispatch('logOut')
             Storge.remove('userInfo')        //删除本地客户端localstorge
+            Storge.remove('token')        //删除本地客户端localstorge
             this.$router.push('/login')
         }
     },
