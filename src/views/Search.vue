@@ -11,9 +11,22 @@
             </tab>
         </div>
         <section class="search_input">
-            <input type="search" :placeholder="searchPlaceholder" v-model="searchContent" onsearch="searchPush()">
+            <input type="search" :placeholder="searchPlaceholder" v-model="searchContent" v-on:search="searchPush">
         </section>
-
+        <div class="hotSearchWarp">
+            <p v-if="currentTab ===0 || currentTab ===1">热门搜索</p>
+            <div class="hotContent" v-if="currentTab===0" v-for="(item,index) in hotSearchList" :key="index">
+                <router-link :to="{ path:'/home/searchresult',query:{searchContent:item.tagName,searchType:currentTab}}">
+                    <x-button mini>{{item.tagName}}</x-button>
+                </router-link>
+            </div>
+            <div class="hotContent" v-if="currentTab===1" v-for="(item,index) in hotSearchList" :key="index">
+                <router-link :to="{ path:'/home/searchresult',query:{searchContent:item.groupName,searchType:currentTab}}">
+                    <x-button mini>{{item.groupName}}</x-button>
+                </router-link>
+            </div>
+            
+        </div>
         <div class="navbarbox"></div>
     </div>
 </template>
@@ -25,8 +38,13 @@ export default {
             // tab样式
             color:'#66cccc',
             searchContent:'',
+            hotSearchList:'',
 
-            currentTab:0
+            currentTab:0,
+
+
+            // API
+            getHotSearchListAPI:this.HOST.host + '/getHotSearchList'
         }
     },
     computed:{
@@ -52,11 +70,28 @@ export default {
     },
     methods:{
         searchPush:function(){
-            
+            console.log(this.searchContent)
+            this.$router.push({ path: '/home/searchresult', query: {searchContent:this.searchContent,searchType:this.currentTab }})
         },
         onItemClick:function(e){
-            this.currentTab = e
+            this.currentTab = e;
+            this.getHotSearchList()
+        },
+        getHotSearchList:function(){
+            let index = this.currentTab;    //获取当前选中的tab值 决定向后台获取什么数据！重要！
+            let _this = this;
+            this.$http.get(this.getHotSearchListAPI,{
+                params:{searchType:_this.currentTab}            //index为0时查询标签、1查询分组
+            }).then(res=>{
+                console.log(res)
+                this.hotSearchList = res.data.hotSearchList
+            }).catch(e=>{
+
+            })
         }
+    },
+    mounted:function(){
+        this.getHotSearchList()
     }
 }
 </script>
@@ -102,5 +137,22 @@ p2r(size){
         // width 80%            
         
     }
+}
+
+.hotSearchWarp{
+    p{
+        font-size 14px;
+        line-height 14px;
+        margin-bottom 15px;
+    }
+
+    padding p2r(20)
+
+    .hotContent{
+        float left
+        margin-right p2r(15)
+        margin-bottom p2r(15)
+    }
+    
 }
 </style>

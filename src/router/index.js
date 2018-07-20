@@ -23,6 +23,7 @@ import GroupDetailPage from '@/views/Group/groupDetail'
 
 // 搜索页面
 import SearchPage from '@/views/Search'
+import SearchResult from '@/views/SearchResult'
 
 
 Vue.use(Router)
@@ -99,6 +100,15 @@ export default new Router({
           meta:{
             title:'搜索',
             requiresAuth:true,
+          }
+        },
+        {
+          path:'searchresult',
+          name:'searchresult',
+          component:SearchResult,
+          meta:{
+            title:'搜索结果',
+            requiresAuth:true
           }
         },
         {
