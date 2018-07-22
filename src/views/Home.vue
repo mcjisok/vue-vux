@@ -13,9 +13,13 @@
             <panel header="我的圈子" :footer="footer" :list="list" :type="type" ></panel>
             <div class="navbarbox"></div> -->
             <keep-alive>
+                <transition name="fade">
                 <router-view v-if="$route.meta.keepAlive"></router-view>
+                </transition>
             </keep-alive>
+            <transition name="fade">
             <router-view v-if="!$route.meta.keepAlive"></router-view>
+            </transition>
         </div>
         
         <Navbar></Navbar>
@@ -102,4 +106,23 @@ p2r(size){
     top: 40px;
 }
 
+.fade-enter-active{
+     animation:Ado .5s ease-in;
+ }
+ @keyframes Ado{
+       0%{transform:scale(0.5,0.5);}
+       60%{transform:scale(1,1);}
+       80%{transform:scale(1.5,1.5);}
+       100%{transform:scale(1,1);}
+ }
+ .fade-leave-active{
+     animation:Bdo .5s ease-in;
+ }
+ @keyframes Bdo{
+       0%{transform:scale(1,1);}
+       60%{transform:scale(1.5,1.5);}
+       80%{transform:scale(1,1);}
+       100%{transform:scale(0.5,0.5);}
+
+ }
 </style>

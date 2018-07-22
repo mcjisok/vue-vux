@@ -5,22 +5,71 @@
         <section class="search_input">
             <input type="search" :placeholder="searchPlaceholder" v-model="searchContent" v-on:search="searchPush">
         </section>
-        <section class="nodata" v-if="hasResult">
+        <section class="nodata" v-if="nodata">
             <img :src="nodataimg" width="100%" alt="">
         </section>
         <section class="resultList" v-else>
             <div class="resultListWarp">
+                <!-- 显示根据标签搜索push的结果pushlist -->
                 <ul v-if="currentTab === 0">
-                    <li v-for="n in 13">
+                    <li v-if="resultList.pushlist" v-for="(n,index) in resultList.pushlist">
+                        <router-link :to="'/home/pushdetail/'+n._id" style="color:#000">
+                            <div class="resultListCon">
+                                <div class="left">
+                                    <img :src="n.pushImageList[0]?HOST + n.pushImageList[0]:nodataimg" width="100%" height="100%" alt="">
+                                </div>
+                                <div class="right">
+                                    <span>{{n.pushTitle}}</span>
+                                    <p>{{n.pushContent}}</p>
+                                </div>
+                            </div>
+                        </router-link>
+                    </li>
+                </ul>
+                <!-- 显示根据分组名称搜索的分组信息 -->
+                <ul v-if="currentTab === 1">
+                    <li v-if="resultList.grouplist" v-for="n in resultList.grouplist">
+                        <router-link :to="'/home/groupdetail/' + n._id" style="color:#000">
+                            <div class="resultListCon">
+                                <div class="left">
+                                    <img :src="HOST + n.groupImg" width="100%" height="100%" alt="">
+                                </div>
+                                <div class="right">
+                                    <span>分组名称：{{n.groupName}}</span>
+                                    <p>分组描述：{{n.groupDescription}}</p>
+                                </div>
+                            </div>
+                        </router-link>
+                    </li>
+                </ul>
+                <!-- 显示根据用户名称搜索到的用户信息 -->
+                <ul v-if="currentTab === 2">
+                    <li v-if="resultList.userlist" v-for="n in resultList.userlist">
                         <div class="resultListCon">
                             <div class="left">
-                                <img :src="nodataimg" width="100%" height="100%" alt="">
+                                <img :src="n.userInfoPhoto?HOST + n.userInfoPhoto:nodataimg" width="100%" height="100%" alt="">
                             </div>
                             <div class="right">
-                                <span>push标题push标题push标题push标题</span>
-                                <p>push内容push内容push内容push内容push内容push内容push内容push内容</p>
+                                <span>用户名称：{{n.name}}</span>
+                                <p>性别：未知</p>
                             </div>
                         </div>
+                    </li>
+                </ul>
+                <!-- 显示根据关键词搜索到的pushlist列表 -->
+                <ul v-if="currentTab === 3">
+                    <li v-if="resultList.pushlist" v-for="(n,index) in resultList.pushlist">
+                        <router-link :to="'/home/pushdetail/'+n._id" style="color:#000">
+                            <div class="resultListCon">
+                                <div class="left">
+                                    <img :src="n.pushImageList[0]?HOST + n.pushImageList[0]:nodataimg" width="100%" height="100%" alt="">
+                                </div>
+                                <div class="right">
+                                    <span>{{n.pushTitle}}</span>
+                                    <p>{{n.pushContent}}</p>
+                                </div>
+                            </div>
+                        </router-link>
                     </li>
                 </ul>
             </div>
@@ -36,12 +85,13 @@ export default {
         return{
             searchType:this.$route.query.searchType,
             searchContent:this.$route.query.searchContent,
-            currentTab:this.$route.query.searchType,
+            currentTab:Number(this.$route.query.searchType),//....我也不知道为什么这里加了个number就处理了一个不知名bug
 
             resultList:'',
-            hasResult:false,
+            nodata:false,
 
             // API
+            HOST:this.HOST.host,
             getSearchResultAPI:this.HOST.host + '/getSearchResult',
             getHotSearchListAPI:this.HOST.host + '/getHotSearchList',
 
@@ -79,13 +129,14 @@ export default {
                     searchContent:_this.searchContent
                 }                
             }).then(res=>{
-                console.log(res)
+                console.log(res,res.data.msg)
                 if(res.data.code === 200){
-                    _this.hasResult = false;
+                    
+                    _this.nodata = false;
                     _this.resultList = res.data
                 }
                 else if(res.data.code === 400){
-                    _this.hasResult = true;
+                    _this.nodata = true;
 
                 }
             }).catch(e=>{
@@ -97,8 +148,12 @@ export default {
             console.log('test')
         }
     },
+    beforeCreate:function(){
+        console.log('装载之前！！')
+    },
     mounted:function(){
         this.getSearchResult();
+        console.log('页面开始装载！！！')
     }
 }
 </script>
@@ -106,6 +161,9 @@ export default {
 <style lang="stylus" scoped>
 p2r(size){
     size/32 * 1rem
+}
+a{
+    text-decoration none;
 }
 
 .search_input{
@@ -157,6 +215,7 @@ p2r(size){
 
 .resultList{
     .resultListWarp{
+        color #ccc
         padding p2r(20)
         border-top 1px solid #f3f4f6
         .resultListCon{
