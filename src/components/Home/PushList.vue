@@ -128,13 +128,18 @@ export default {
         let _this = this;  
         // this.loadmoreSW = true;  
         window.addEventListener('scroll',function(){  
+            // console.log('正在滚动')
             // console.log(document.documentElement.clientHeight+'-----------'+window.innerHeight); // 可视区域高度  
             // console.log(document.body.scrollTop); // 滚动高度  
             // console.log(document.body.offsetHeight); // 文档高度  
+            // console.log(document.documentElement.scrollTop + window.innerHeight >= document.body.offsetHeight)
+            console.log(document.documentElement.scrollTop,window.innerHeight,document.body.offsetHeight)
             if(document.body.scrollTop + window.innerHeight >= document.body.offsetHeight && _this.hasMore) {  
                 // console.log(sw);
                 // 如果开关打开则加载数据  
+                console.log('到底了')
                 if(_this.loadmoreSW){
+                    console.log('!!!!!!!!!!!!!!!')
                     // 将开关关闭 
                     // console.log(sw) 
                     // _this.loadmoreSW = false;  

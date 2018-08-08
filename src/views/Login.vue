@@ -51,6 +51,7 @@ export default {
         },
         login:function(){
             // console.log('点击登录按钮有反应')
+            alert('正在登陆')
             let _self = this;
             this.$http.post(this.login_url,{
                 username:this.username,

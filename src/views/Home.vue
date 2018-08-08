@@ -13,13 +13,13 @@
             <panel header="我的圈子" :footer="footer" :list="list" :type="type" ></panel>
             <div class="navbarbox"></div> -->
             <keep-alive>
-                <transition name="fade">
+                <!-- <transition name="fade"> -->
                 <router-view v-if="$route.meta.keepAlive"></router-view>
-                </transition>
+                <!-- </transition> -->
             </keep-alive>
-            <transition name="fade">
+            <!-- <transition name="fade"> -->
             <router-view v-if="!$route.meta.keepAlive"></router-view>
-            </transition>
+            <!-- </transition> -->
         </div>
         
         <Navbar></Navbar>
