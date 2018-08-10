@@ -1,6 +1,9 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+import 'babel-polyfill'
 import Vue from 'vue'
+import Es6Promise from 'es6-promise'
+Es6Promise.polyfill()
 import App from './App'
 import router from './router'
 import store from './store/index'
@@ -8,6 +11,8 @@ import store from './store/index'
 import Storge from './assets/commonjs/SetLocalStorge'
 
 Vue.config.productionTip = false
+
+// import 'babel-polyfill';
 
 import { Group, XInput, XButton, Flexbox, FlexboxItem, Tabbar, TabbarItem, XHeader, Swiper, SwiperItem,Panel, Alert, XTextarea, Cell, XImg, Spinner, Icon, XSwitch, Previewer, Scroller, LoadMore, Confirm, Loading, PopupPicker, Masker,Divider,Badge,TransferDom, Tab, TabItem} from 'vux'
 
@@ -77,6 +82,7 @@ router.beforeEach((to, from, next) => {
     let token = Storge.get('token')
     console.log('2')
     if(user!==null){
+      console.log('从cookie中获取的userinfo为',user)
       store.dispatch('changeLogin',user)
       router.push('/home/index')
       console.log('3')

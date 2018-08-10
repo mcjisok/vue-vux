@@ -133,7 +133,7 @@ export default {
             // console.log(document.body.scrollTop); // 滚动高度  
             // console.log(document.body.offsetHeight); // 文档高度  
             // console.log(document.documentElement.scrollTop + window.innerHeight >= document.body.offsetHeight)
-            console.log(document.documentElement.scrollTop,window.innerHeight,document.body.offsetHeight)
+            // console.log(document.documentElement.scrollTop,window.innerHeight,document.body.offsetHeight)
             if(document.body.scrollTop + window.innerHeight >= document.body.offsetHeight && _this.hasMore) {  
                 // console.log(sw);
                 // 如果开关打开则加载数据  

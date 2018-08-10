@@ -13,9 +13,7 @@ function resolve (dir) {
 
 const webpackConfig = {
   context: path.resolve(__dirname, '../'),
-  entry: {
-    app: './src/main.js'
-  },
+  entry: ["babel-polyfill",'./src/main.js'],
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',

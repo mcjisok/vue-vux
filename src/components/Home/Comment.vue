@@ -26,7 +26,7 @@
                                 <div class="InfoName">
                                     <!-- <router-link>用户名称</router-link> -->
                                     <a href="javascript:;">{{item.from.name}}</a>
-                                    <p>2018年5月31日21:24:00</p>                                    
+                                    <p>{{item.meta.createAt | moment('YYYY年MM月DD日 HH:mm:ss')}}</p>                                    
                                 </div>
 
                                 <div class="InfoNice">

@@ -6,24 +6,48 @@ import Register from '@/views/Register'
 import Home from '@/views/Home'
 
 // Home 子路由页面组件引入
-import IndexPage from '@/views/Index'
-import PushPage from '@/views/Push/Push'
-import PushDetailPage from '@/views/Push/PushDetail'
-import ZonePage from '@/views/Zone'
-import MemberPage from '@/views/Member'
-import GroupPage from '@/views/Group/groupList'
-import NewGroupPage from '@/views/Group/addNewGroup'
+// import IndexPage from '@/views/Index'
+const IndexPage = () => import(/* webpackChunkName: "Index" */ '@/views/Index')
+// import PushPage from '@/views/Push/Push'
+const PushPage = () => import(/* webpackChunkName: "PushPage" */ '@/views/Push/Push')
+// import PushDetailPage from '@/views/Push/PushDetail'
+const PushDetailPage = () => import(/* webpackChunkName: "PushDetailPage" */ '@/views/Push/PushDetail')
+
+// import ZonePage from '@/views/Zone'
+const ZonePage = () => import(/* webpackChunkName: "ZonePage" */ '@/views/Zone')
+
+// import MemberPage from '@/views/Member'
+const MemberPage = () => import(/* webpackChunkName: "MemberPage" */ '@/views/Member')
+
+// import GroupPage from '@/views/Group/groupList'
+const GroupPage = () => import(/* webpackChunkName: "GroupPage" */ '@/views/Group/groupList')
+
+// import NewGroupPage from '@/views/Group/addNewGroup'
+const NewGroupPage = () => import(/* webpackChunkName: "NewGroupPage" */ '@/views/Group/addNewGroup')
+
 // 个人中心子页面
-import SettingPage from '@/views/Member/Setting'
-import Drafts from '@/views/Member/Drafts'
-import About from '@/views/AboutMe'
+// import SettingPage from '@/views/Member/Setting'
+const SettingPage = () => import(/* webpackChunkName: "SettingPage" */ '@/views/Member/Setting')
+
+// import Drafts from '@/views/Member/Drafts'
+const Drafts = () => import(/* webpackChunkName: "Drafts" */ '@/views/Member/Drafts')
+
+// import About from '@/views/AboutMe'
+const About = () => import(/* webpackChunkName: "About" */ '@/views/AboutMe')
+
 
 // 分组详情页面
-import GroupDetailPage from '@/views/Group/groupDetail'
+// import GroupDetailPage from '@/views/Group/groupDetail'
+const GroupDetailPage = () => import(/* webpackChunkName: "GroupDetailPage" */ '@/views/Group/groupDetail')
+
 
 // 搜索页面
-import SearchPage from '@/views/Search'
-import SearchResult from '@/views/SearchResult'
+// import SearchPage from '@/views/Search'
+const SearchPage = () => import(/* webpackChunkName: "SearchPage" */ '@/views/Search')
+
+// import SearchResult from '@/views/SearchResult'
+const SearchResult = () => import(/* webpackChunkName: "SearchResult" */ '@/views/SearchResult')
+
 
 
 Vue.use(Router)

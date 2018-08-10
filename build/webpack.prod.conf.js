@@ -16,6 +16,10 @@ const env = process.env.NODE_ENV === 'testing'
   : require('../config/prod.env')
 
 const webpackConfig = merge(baseWebpackConfig, {
+  // 设置vue等库不打包进vendor文件
+  // externals:{
+  //   'vue':'vue'
+  // },
   module: {
     rules: utils.styleLoaders({
       sourceMap: config.build.productionSourceMap,
