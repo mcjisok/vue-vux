@@ -26,7 +26,7 @@
             </li>
             <!-- <li><router-link to="/shopping_cart"><img src="../assets/icon/1 (1).png" alt=""></router-link></li> -->
         </ul>
-        <p>{{nowRouterPath}}</p>
+        <!-- <p>{{nowRouterPath}}</p> -->
     </div>
 </template>
 

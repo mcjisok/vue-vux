@@ -14,13 +14,13 @@
                 <cell title="我的动态" is-link>
                     <img slot="icon" width="20" style="display:block;margin-right:5px;" src="../assets/icon/tag.png">
                 </cell>
-                <cell is-link link="/home/drafts">
-                    <span slot="title"><span style="vertical-align:middle;">草稿箱</span> <badge text="1"></badge></span>                    
-                    <img slot="icon" width="20" style="display:block;margin-right:5px;" src="../assets/icon/tag.png">
-                </cell>
                 <cell title="我的相册" is-link>
                     <img slot="icon" width="20" style="display:block;margin-right:5px;" src="../assets/icon/photo.png">
                 </cell>
+                <cell is-link link="/home/drafts">
+                    <span slot="title"><span style="vertical-align:middle;">草稿箱</span> <badge text="1"></badge></span>                    
+                    <img slot="icon" width="20" style="display:block;margin-right:5px;" src="../assets/icon/tag.png">
+                </cell>                
                 <cell title="编辑资料" is-link link="/home/setting">
                     <img slot="icon" width="20" style="display:block;margin-right:5px;" src="../assets/icon/setting.png">
                 </cell>

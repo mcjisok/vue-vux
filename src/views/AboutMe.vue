@@ -6,9 +6,9 @@
             <p>版本:v1.0</p>
         </div>
         <group>
-        <cell title="官方微信" value="m101flymer"></cell>
-        <cell title="官方网址" value="www.flymer.net"></cell>
-        <cell title="客服QQ" value="353750533"></cell>
+        <cell title="官方微信" value="*****"></cell>
+        <cell title="官方网址" value="*****"></cell>
+        <cell title="客服QQ" value="*****"></cell>
         <cell title="版权所有" value="Copyright 2018 by mcj"></cell>
         </group>
 
