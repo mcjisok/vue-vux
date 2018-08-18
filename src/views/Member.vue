@@ -8,7 +8,7 @@
             </blur>
             <group>
                 <cell is-link >
-                    <span slot="title" style="color:green;"><span style="vertical-align:middle;">消息</span> <badge text="1"></badge></span>
+                    <span slot="title" style="color:green;"><span style="vertical-align:middle;">消息</span><badge text="1"></badge></span>
                     <img slot="icon" width="20" style="display:block;margin-right:5px;" src="../assets/icon/msg.png">                    
                 </cell>
                 <cell title="我的动态" is-link>
@@ -20,14 +20,13 @@
                 <cell is-link link="/home/drafts">
                     <span slot="title"><span style="vertical-align:middle;">草稿箱</span> <badge text="1"></badge></span>                    
                     <img slot="icon" width="20" style="display:block;margin-right:5px;" src="../assets/icon/tag.png">
-                </cell>                
+                </cell>
                 <cell title="编辑资料" is-link link="/home/setting">
                     <img slot="icon" width="20" style="display:block;margin-right:5px;" src="../assets/icon/setting.png">
                 </cell>
                 <cell title="关于我们" is-link link="/home/about">
-                    <img slot="icon" width="20" style="display:block;margin-right:5px;" src="../assets/icon/about.png"
-                >
-                </cell>                
+                    <img slot="icon" width="20" style="display:block;margin-right:5px;" src="../assets/icon/about.png">
+                </cell>
             </group>
         </div>
         <div class="navbarbox"></div>
@@ -68,7 +67,4 @@ export default {
     }
     
 }
-
-
-
 </style>

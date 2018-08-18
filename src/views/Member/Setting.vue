@@ -11,6 +11,8 @@
                     <x-icon type="ios-plus-empty" size="30"></x-icon>
                 </cell>
                 <x-input title="你的昵称:" placeholder="请输入昵称" v-model="name"></x-input>
+                <popup-radio title="你的性别:" :options="sexGroup" v-model="sex"></popup-radio>  
+                <x-textarea title="个性签名:" v-model="describe"></x-textarea>              
                 <x-input title="手机号码:" placeholder="请输入手机号码" type="number" v-model="usermobile"></x-input>
                 <x-input title="邮箱地址:" placeholder="请输入邮箱地址" type="email" is-type="email" v-model="usermail"></x-input>
                 <x-address title="你的城市:" v-model="addressValue" :list="addressData"  placeholder="请选择地址" value-text-align="left"></x-address>
@@ -43,6 +45,9 @@ export default {
             usermobile:this.$store.state.userinfo.usermobile,
             usermail:this.$store.state.userinfo.useremail,
             userInfoPhoto:this.$store.state.userinfo.userInfoPhoto,
+            sex: this.$store.state.userinfo.sex,
+            sexGroup: ['男','女'],
+            describe:this.$store.state.userinfo.describe,//个性签名
             // tx_url:this.HOST.host + this.userInfoPhoto,
             required:true,
 
@@ -56,7 +61,9 @@ export default {
             addressValue:this.$store.state.userinfo.userAddress,
 
             // 是否提交保存资料
-            saveMsg:false
+            saveMsg:false,
+
+            
         }
     },
     components:{
@@ -71,6 +78,7 @@ export default {
                 return this.HOST.host + this.userInfoPhoto                
             }
         },
+
         
     },
     methods:{
@@ -128,7 +136,9 @@ export default {
                     usermobile:_this.usermobile,
                     useremail:_this.usermail,
                     userInfoPhoto:_this.userInfoPhoto,
-                    userAddress:_this.addressValue,      
+                    userAddress:_this.addressValue,    
+                    sex:_this.sex,  
+                    describe:_this.describe
                 }                          
             }
             _this.$http.post(_this.saveUserInfoAPI,data)
@@ -170,5 +180,12 @@ p2r(size){
             border 1px solid #f3f4f6
         }
     }
+}
+
+.topbarbox{
+    height: 46px;
+}
+.navbarbox{
+    height: p2r(85);
 }
 </style>
