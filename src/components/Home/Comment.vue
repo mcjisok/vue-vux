@@ -42,7 +42,7 @@
                             <div class="replyList" v-for="(n,i) in item.reply.slice(0,maxCommentReply)" :key="i" v-if="item.reply.length > 0">
                                 <div class="reply_content">
                                     <p>
-                                        {{n.from.name}} 回复 {{n.to.name}}:{{n.content}}
+                                        {{n.from.name}} 回复 {{n.to.name}}：{{n.content}}
                                     </p>
                                     <div class="reply_icon">
                                         <span @click="reply(n.from.name,n.from._id,item._id)"></span>                                    
@@ -216,6 +216,8 @@ p2r(size){
 
 .comment{
     margin-bottom:p2r(15)
+    border-top:p2r(2) solid #f3f4f6
+    padding-top p2r(15)
     .comment_input{        
         width 100%
         height 30px

@@ -25,21 +25,23 @@
                                 <p class="warp_title">{{n.pushContent}}</p>
                             </div>
                         </router-link>
-                        <router-link :to="'/home/pushdetail/' + n._id">
+                        
                             <div class="ctx_img" v-if="n.pushImageList.length > 0">
                                 <!-- <img class="previewer-demo-img" v-for="(item, index) in list" :key="item.src" :src="item.src" width="100" @click="show(index)"> -->
                                 
                                 <ul class="figure-list">
+                                    <router-link :to="'/home/pushdetail/' + n._id">
                                     <li v-for="(item, index) in n.pushImageList.slice(0,3)" :key="index">
                                         <figure v-bind:style="{backgroundImage:'url('+host+item+')'}" class="previewer-demo-img">
                                             <!-- <a href="#"></a> -->
                                             <!-- <img src="" alt=""> -->
                                         </figure>
-                                    </li>                            
+                                    </li>    
+                                    </router-link>                        
                                 </ul>
                                 
                             </div>
-                        </router-link>
+                        
                         <Comment 
                             :pushID="n._id" 
                             :fromID="$store.state.nowLoginUserID" 
@@ -127,14 +129,20 @@ export default {
     mounted:function () {
         let _this = this;  
         // this.loadmoreSW = true;  
+        let pl = document.getElementsByClassName('pushList')
         window.addEventListener('scroll',function(){  
             // console.log('正在滚动')
             // console.log(document.documentElement.clientHeight+'-----------'+window.innerHeight); // 可视区域高度  
             // console.log(document.body.scrollTop); // 滚动高度  
+            // console.log(document.documentElement.scrollTop + '测试');  
             // console.log(document.body.offsetHeight); // 文档高度  
             // console.log(document.documentElement.scrollTop + window.innerHeight >= document.body.offsetHeight)
             // console.log(document.documentElement.scrollTop,window.innerHeight,document.body.offsetHeight)
-            if(document.body.scrollTop + window.innerHeight >= document.body.offsetHeight && _this.hasMore) {  
+            // console.log('e')
+            let scrollTopSize = document.documentElement.scrollTop|| document.body.scrollTop
+            // console.log(document.documentElement.scrollTop)
+            // console.log(document.body.scrollTop)
+            if(scrollTopSize + window.innerHeight >= document.body.offsetHeight  && _this.hasMore) {  
                 // console.log(sw);
                 // 如果开关打开则加载数据  
                 console.log('到底了')
@@ -145,7 +153,7 @@ export default {
                     // _this.loadmoreSW = false;  
                     // _this.loadmore();     
                     // 告知父组件可以加载更多数据
-                    _this.$emit('loadMore')               
+                    _this.$emit('loadMore')
                 }  
             }
         })

@@ -48,7 +48,8 @@ const SearchPage = () => import(/* webpackChunkName: "SearchPage" */ '@/views/Se
 // import SearchResult from '@/views/SearchResult'
 const SearchResult = () => import(/* webpackChunkName: "SearchResult" */ '@/views/SearchResult')
 
-
+//我的相册
+const Album = () => import('@/views/Member/Album')
 
 Vue.use(Router)
 
@@ -86,7 +87,9 @@ export default new Router({
           component: IndexPage,
           meta:{
             title:'首页',
-            keepAlive:true
+            keepAlive:false,
+            topNav:true,//是否显示顶部导航
+            routerAnimate:false
           }
         },
         {
@@ -113,7 +116,9 @@ export default new Router({
           meta:{
             title:'分组',
             requiresAuth:true,
-            keepAlive:true
+            keepAlive:false,
+            topNav:true,
+            routerAnimate:true
           }          
         },
         // 搜索页面
@@ -124,6 +129,8 @@ export default new Router({
           meta:{
             title:'搜索',
             requiresAuth:true,
+            topNav:true,
+            routerAnimate:true
           }
         },
         {
@@ -172,7 +179,9 @@ export default new Router({
           component:MemberPage,
           meta:{
             title:'个人中心',
-            requiresAuth:true
+            requiresAuth:true,
+            topNav:true,
+            routerAnimate:true
           }
         },
         {
@@ -181,6 +190,15 @@ export default new Router({
           component:SettingPage,
           meta:{
             title:'设置',
+            requiresAuth:true
+          }
+        },
+        {
+          path:'album',
+          name:'Album',
+          component:Album,
+          meta:{
+            title:'我的相册',
             requiresAuth:true
           }
         },

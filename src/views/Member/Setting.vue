@@ -148,7 +148,7 @@ export default {
                     _this.$vux.toast.show({
                         text: '保存成功',
                         type:'success',
-                        onHide () {                            
+                        onHide () {
                             _this.$router.go(-1)
                             // console.log('1111111111111111111111111111111111111111111')
                             // console.log(res)

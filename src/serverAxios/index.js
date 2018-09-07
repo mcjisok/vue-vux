@@ -8,9 +8,11 @@ import router from '@/router'
 axios.interceptors.request.use(
     config => {
       const token = Storge.get('token');
+      const udata = Storge.get('userInfo')
       if (token) {
         // Bearer是JWT的认证头部信息
         config.headers.common['Authorization'] = 'Bearer ' + token;
+        config.headers.common['UserID'] = udata._id;
       }
       return config;
     },

@@ -17,12 +17,17 @@
                 <router-view v-if="$route.meta.keepAlive"></router-view>
                 <!-- </transition> -->
             </keep-alive>
-            <!-- <transition name="fade"> -->
-            <router-view v-if="!$route.meta.keepAlive"></router-view>
-            <!-- </transition> -->
+            <!-- <transition name="" v-if="$route.meta.routerAnimate"> -->
+            <transition>
+                <router-view v-if="!$route.meta.keepAlive"></router-view>
+            </transition>
+            <!-- <transition name="" v-else>
+                <router-view v-if="!$route.meta.keepAlive"></router-view>
+            </transition> -->
+
         </div>
         
-        <Navbar></Navbar>
+        <Navbar v-if="$route.meta.topNav"></Navbar>
     </div>
 </template>
 
@@ -107,22 +112,22 @@ p2r(size){
 }
 
 .fade-enter-active{
-     animation:Ado .5s ease-in;
+     animation:Ado .2s ease-in;
  }
  @keyframes Ado{
-       0%{transform:scale(0.5,0.5);}
+       0%{transform:scale(0.8,0.5);}
        60%{transform:scale(1,1);}
-       80%{transform:scale(1.5,1.5);}
+       80%{transform:scale(1.1,1.1);}
        100%{transform:scale(1,1);}
  }
- .fade-leave-active{
-     animation:Bdo .5s ease-in;
- }
- @keyframes Bdo{
-       0%{transform:scale(1,1);}
-       60%{transform:scale(1.5,1.5);}
-       80%{transform:scale(1,1);}
-       100%{transform:scale(0.5,0.5);}
+//  .fade-leave-active{
+//      animation:Bdo .5s ease-in;
+//  }
+//  @keyframes Bdo{
+//        0%{transform:scale(1,1);}
+//        60%{transform:scale(1.5,1.5);}
+//        80%{transform:scale(1,1);}
+//        100%{transform:scale(0.5,0.5);}
 
- }
+//  }
 </style>

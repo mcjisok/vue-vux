@@ -3,25 +3,28 @@
         <ul>
             <li>
                 <router-link to="/home/index">
-                <img v-if="nowRouterPath=='/home/index'" src="../assets/icon/home.svg" alt="">
+                <img v-if="nowRouterPath=='/home/index'" src="../assets/icon/home1.svg" alt="">
                 <img v-else src="../assets/icon/home.svg" alt="">
                 </router-link>
             </li>
             <li>
                 <router-link to="/home/group">
-                <img v-if="nowRouterPath=='/home/group'" src="../assets/icon/find.svg" alt="">
+                <img v-if="nowRouterPath=='/home/group'" src="../assets/icon/find1.svg" alt="">
                 <img v-else src="../assets/icon/find.svg" alt="">
                 </router-link>
             </li>
             <li>
                 <router-link to="/home/search">
+                <img v-if="nowRouterPath=='/home/search'" src="../assets/icon/focus1.svg" alt="">
                 <img src="../assets/icon/focus.svg" alt="">
                 </router-link>
             </li>
             <li>
                 <router-link to="/home/member">
-                <img v-if="nowRouterPath=='/home/member'" src="../assets/icon/member.svg" alt="">
+                <transition name="fade">
+                <img v-if="nowRouterPath=='/home/member'" src="../assets/icon/member1.svg" alt="">                
                 <img v-else src="../assets/icon/member.svg" alt="">
+                </transition>
                 </router-link>
             </li>
             <!-- <li><router-link to="/shopping_cart"><img src="../assets/icon/1 (1).png" alt=""></router-link></li> -->
@@ -47,6 +50,13 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
 p2r(size){
     size/32 * 1rem
 }

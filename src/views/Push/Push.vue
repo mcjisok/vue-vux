@@ -130,6 +130,7 @@ export default {
                 let url ='';
                 let form = new FormData();
                 form.append('file',img1,img1.name);  
+                console.log(form,'数据？？')
                 this.$http.post(this.uploadPushImgApi,form,{
                     headers:{'Content-Type':'multipart/form-data'} 
                 })

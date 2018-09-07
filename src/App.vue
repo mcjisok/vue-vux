@@ -22,6 +22,9 @@ export default {
   -moz-box-sizing:border-box; /* Firefox */
   -webkit-box-sizing:border-box; /* Safari */
 }
+li{
+  list-style none;
+}
 a{
   text-decoration: none;
 }

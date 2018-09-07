@@ -13,7 +13,8 @@
         <section class="search_input">
             <input type="search" :placeholder="searchPlaceholder" v-model="searchContent" v-on:search="searchPush">
         </section>
-        <div class="hotSearchWarp">
+        <transition name="fade">
+        <div class="hotSearchWarp" v-if="currentTab ===0 || currentTab ===1">
             <p v-if="currentTab ===0 || currentTab ===1">热门搜索</p>
             <div class="hotContent" v-if="currentTab===0" v-for="(item,index) in hotSearchList" :key="index">
                 <router-link :to="{ path:'/home/searchresult',query:{searchContent:item.tagName,searchType:currentTab}}">
@@ -24,9 +25,9 @@
                 <router-link :to="{ path:'/home/searchresult',query:{searchContent:item.groupName,searchType:currentTab}}">
                     <x-button mini>{{item.groupName}}</x-button>
                 </router-link>
-            </div>
-            
+            </div>            
         </div>
+        </transition>
         <div class="navbarbox"></div>
     </div>
 </template>
@@ -97,6 +98,13 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
 p2r(size){
     size/32 * 1rem
 }

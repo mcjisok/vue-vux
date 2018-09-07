@@ -31,6 +31,13 @@ const webpackConfig = {
   module: {
     rules: [
       {
+        test: /vux.src.*?js$/,
+        loader: 'babel-loader',
+        // query: {
+        //   presets: ['es2015']
+        // },
+      },
+      {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: vueLoaderConfig
@@ -38,6 +45,9 @@ const webpackConfig = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
+        // query: {
+        //   presets: ['es2015']
+        // },
         include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
       },
       {

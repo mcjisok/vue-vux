@@ -14,7 +14,7 @@
                 <cell title="我的动态" is-link>
                     <img slot="icon" width="20" style="display:block;margin-right:5px;" src="../assets/icon/tag.png">
                 </cell>
-                <cell title="我的相册" is-link>
+                <cell title="我的相册" is-link link="/home/album">
                     <img slot="icon" width="20" style="display:block;margin-right:5px;" src="../assets/icon/photo.png">
                 </cell>
                 <cell is-link link="/home/drafts">
