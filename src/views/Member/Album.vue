@@ -3,9 +3,9 @@
         <div class="topbarbox"></div> 
         <div class="photo_list">
             <div class="img" v-for="(n,i) in imgList" :key="i">
-                <!-- <img :src="host + n.path" alt="" width="100%"> -->
-                <span style="font-size:20px;">...</span>
-                <x-img :src="host + n.path" :webp-src="`${host + n.path}?type=webp`" @on-success="success" @on-error="error" class="ximg-demo" error-class="ximg-error" :offset="-100" container="#vux_view_box_body"></x-img>
+                <img :src="host + n.path" alt="" width="100%">
+                <!-- <span style="font-size:20px;">321</span>
+                <x-img :src="host + n.path" :webp-src="`${host + n.path}?type=webp`" delay="300" @on-success="success" @on-error="error" class="ximg-demo" error-class="ximg-error" :offset="-100" container="#vux_view_box_body"></x-img> -->
             </div>
         </div>   
     </div>
