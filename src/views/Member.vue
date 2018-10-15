@@ -3,7 +3,7 @@
         <div class="topbarbox"></div>            
         <div class="member_warp">
             <blur :blur-amount=40 :url="this.HOST.host + url" :height="blur_height">
-                <p class="center"><img :src="this.HOST.host + url"></p>
+                <p class="center"><img :src="url?this.HOST.host + url:defaultTX"></p>
                 <!-- <p class="member_name">用户名称</p> -->
             </blur>
             <group>
@@ -36,12 +36,15 @@
 <script>
 import { Blur } from 'vux'
 import { Badge } from 'vux'
+import defaultTX from '@/assets/defaulttx.svg'
+
 export default {
     data(){
         return{
             blur_height:150,
             url: this.$store.state.userinfo.userInfoPhoto,
             title:'用户中心',
+            defaultTX:defaultTX
         }
     },
     components: {

@@ -12,7 +12,7 @@
             <div class="resultListWarp">
                 <!-- 显示根据标签搜索push的结果pushlist -->
                 <ul v-if="currentTab === 0">
-                    <li v-if="resultList.pushlist" v-for="(n,index) in resultList.pushlist">
+                    <li v-if="resultList.pushlist" v-for="(n,index) in resultList.pushlist" :key="index">
                         <router-link :to="'/home/pushdetail/'+n._id" style="color:#000">
                             <div class="resultListCon">
                                 <div class="left">
@@ -28,7 +28,7 @@
                 </ul>
                 <!-- 显示根据分组名称搜索的分组信息 -->
                 <ul v-if="currentTab === 1">
-                    <li v-if="resultList.grouplist" v-for="n in resultList.grouplist">
+                    <li v-if="resultList.grouplist" v-for="(n,index) in resultList.grouplist" :key="index">
                         <router-link :to="'/home/groupdetail/' + n._id" style="color:#000">
                             <div class="resultListCon">
                                 <div class="left">
@@ -44,7 +44,7 @@
                 </ul>
                 <!-- 显示根据用户名称搜索到的用户信息 -->
                 <ul v-if="currentTab === 2">
-                    <li v-if="resultList.userlist" v-for="n in resultList.userlist">
+                    <li v-if="resultList.userlist" v-for="(n,index) in resultList.userlist" :key="index">
                         <div class="resultListCon">
                             <div class="left">
                                 <img :src="n.userInfoPhoto?HOST + n.userInfoPhoto:nodataimg" width="100%" height="100%" alt="">
@@ -58,7 +58,7 @@
                 </ul>
                 <!-- 显示根据关键词搜索到的pushlist列表 -->
                 <ul v-if="currentTab === 3">
-                    <li v-if="resultList.pushlist" v-for="(n,index) in resultList.pushlist">
+                    <li v-if="resultList.pushlist" v-for="(n,index) in resultList.pushlist" :key="index">
                         <router-link :to="'/home/pushdetail/'+n._id" style="color:#000">
                             <div class="resultListCon">
                                 <div class="left">

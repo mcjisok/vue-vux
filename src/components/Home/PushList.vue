@@ -20,27 +20,29 @@
                             </div>
                             <div class="head_right"></div>
                         </div>
-                        <router-link :to="'/home/pushdetail/' + n._id">
-                            <div class="ctx_warp">
-                                <p class="warp_title">{{n.pushContent}}</p>
-                            </div>
-                        </router-link>
                         
-                            <div class="ctx_img" v-if="n.pushImageList.length > 0">
-                                <!-- <img class="previewer-demo-img" v-for="(item, index) in list" :key="item.src" :src="item.src" width="100" @click="show(index)"> -->
-                                
-                                <ul class="figure-list">
-                                    <router-link :to="'/home/pushdetail/' + n._id">
-                                    <li v-for="(item, index) in n.pushImageList.slice(0,3)" :key="index">
-                                        <figure v-bind:style="{backgroundImage:'url('+host+item+')'}" class="previewer-demo-img">
-                                            <!-- <a href="#"></a> -->
-                                            <!-- <img src="" alt=""> -->
-                                        </figure>
-                                    </li>    
-                                    </router-link>                        
-                                </ul>
-                                
-                            </div>
+                        <div class="ctx_warp">
+                            <router-link :to="'/home/pushdetail/' + n._id">
+                            <p class="warp_title">{{n.pushContent}}</p>
+                            </router-link>
+                        </div>
+                    
+                    
+                        <div class="ctx_img" v-if="n.pushImageList.length > 0">
+                            <!-- <img class="previewer-demo-img" v-for="(item, index) in list" :key="item.src" :src="item.src" width="100" @click="show(index)"> -->
+                            
+                            <ul class="figure-list">
+                                <router-link :to="'/home/pushdetail/' + n._id">
+                                <li v-for="(item, index) in n.pushImageList.slice(0,3)" :key="index">
+                                    <figure v-bind:style="{backgroundImage:'url('+host+item+')'}" class="previewer-demo-img">
+                                        <!-- <a href="#"></a> -->
+                                        <!-- <img src="" alt=""> -->
+                                    </figure>
+                                </li>    
+                                </router-link>                        
+                            </ul>
+                            
+                        </div>
                         
                         <Comment 
                             :pushID="n._id" 

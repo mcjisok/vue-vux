@@ -2,7 +2,7 @@
     <div class="setting">
         <div class="topbarbox"></div>      
             <div class="userPhoto">
-                <img :src="tx_url?tx_url:''" alt="" width="150" height="150">
+                <img :src="tx_url?tx_url:defaultTX" alt="" width="150" height="150">
             </div>     
             <group label-width="4.5em" label-margin-right="2.5em" label-align="left">
                 <cell title="修改头像" @click.native.stop="openFile">        
@@ -32,6 +32,7 @@
 import { XAddress,ChinaAddressV4Data } from 'vux'
 import { mapState } from 'vuex'
 import { mapActions } from 'vuex'
+import defaultTX from '@/assets/defaulttx.svg'
 
 export default {
     data(){
@@ -62,6 +63,9 @@ export default {
 
             // 是否提交保存资料
             saveMsg:false,
+
+            //默认头像
+            defaultTX:defaultTX
 
             
         }

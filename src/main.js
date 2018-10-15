@@ -14,7 +14,7 @@ Vue.config.productionTip = false
 
 // import 'babel-polyfill';
 
-import { Group, XInput, XButton, Flexbox, FlexboxItem, Tabbar, TabbarItem, XHeader, Swiper, SwiperItem,Panel, Alert, XTextarea, Cell, XImg, Spinner, Icon, XSwitch, Previewer, Scroller, LoadMore, Confirm, Loading, PopupPicker, Masker,Divider,Badge, Selector ,TransferDom, Tab, TabItem,PopupRadio, } from 'vux'
+import { Group, XInput, XButton, Flexbox, FlexboxItem, Tabbar, TabbarItem, XHeader, Swiper, SwiperItem,Panel, Alert, XTextarea, Cell, XImg, Spinner, Icon, XSwitch, Previewer, Scroller, LoadMore, Confirm, Loading, PopupPicker, Masker,Divider,Badge, Selector ,TransferDom, Tab, TabItem,PopupRadio, Grid, GridItem} from 'vux'
 
 Vue.component('group', Group)
 Vue.component('x-input', XInput)
@@ -50,6 +50,8 @@ Vue.component('tab-item', TabItem)
 Vue.component('selector', Selector)
 Vue.component('popup-radio', PopupRadio)
 
+Vue.component('grid', Grid)
+Vue.component('grid-item', GridItem)
 
 // vux以插件形式引入
 import { AlertPlugin } from 'vux'
