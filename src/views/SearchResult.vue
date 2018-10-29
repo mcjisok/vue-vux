@@ -127,7 +127,7 @@ export default {
                 params:{
                     searchType:_this.searchType,
                     searchContent:_this.searchContent
-                }                
+                } 
             }).then(res=>{
                 console.log(res,res.data.msg)
                 if(res.data.code === 200){

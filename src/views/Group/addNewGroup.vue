@@ -149,7 +149,7 @@ export default {
                     _this.$vux.toast.show({
                         text: '发布成功',
                         type:'success',
-                        onHide () {                            
+                        onHide () {
                             _this.$router.push('/home/group')
                         }
                     })

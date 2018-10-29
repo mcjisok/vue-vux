@@ -91,7 +91,7 @@ export default {
         
     },
     methods:{
-        // 判断分组ID是否在全局状态存在，如果存在则获取诗句
+        // 判断分组ID是否在全局状态存在，如果存在则获取数据
         getGroupInfo(){
             let _this = this;
             if(this.groupID !== ''){

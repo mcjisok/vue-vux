@@ -5,6 +5,9 @@ import Storge from '../assets/commonjs/SetLocalStorge'
 import { AlertModule } from 'vux'
 import router from '@/router'
 
+axios.defaults.retry = 4;
+axios.defaults.retryDelay = 1000;
+// axios.defaults.baseURL = 'https://api.example.com';
 axios.interceptors.request.use(
     config => {
       const token = Storge.get('token');
@@ -26,6 +29,38 @@ axios.interceptors.response.use(
       return response;
     },
     error => {
+      // console.log(error.config);
+      // console.log('/sds')
+
+
+      // var config = error.config;
+      // // If config does not exist or the retry option is not set, reject
+      // if(!config || !config.retry) return Promise.reject(error);
+      
+      // // Set the variable for keeping track of the retry count
+      // config.__retryCount = config.__retryCount || 0;
+      
+      // // Check if we've maxed out the total number of retries
+      // if(config.__retryCount >= config.retry) {
+      //     // Reject with the error
+      //     return Promise.reject(error);
+      // }
+      
+      // // Increase the retry count
+      // config.__retryCount += 1;
+      
+      // // Create new promise to handle exponential backoff
+      // var backoff = new Promise(function(resolve) {
+      //     setTimeout(function() {
+      //         resolve();
+      //     }, config.retryDelay || 1);
+      // });
+      
+      // // Return the promise in which recalls axios to retry the request
+      // return backoff.then(function() {
+      //     return axios(config);
+      // });
+      // console.log(errpr.res)
       if (error.response.status === 401 || error.response.status === 400) {
         console.log(error.response.status)
         AlertModule.show({
