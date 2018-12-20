@@ -6,7 +6,7 @@
         <group label-width="4.5em" label-margin-right="2em" label-align="right">
             <!-- <h1>登录页</h1> -->
             <x-input title="登录账号" placeholder="请输入用户账号" v-model="username" :required="required"></x-input>
-            <x-input title="登录密码" placeholder="请输入用户密码" type="password" v-model="userpwd" :required="required"></x-input>
+            <x-input title="登录密码" placeholder="请输入用户密码" type="password" v-model="userpwd" :required="required"></x-input>  
         </group>
 
         <div class="mcj_login_btnwarp">

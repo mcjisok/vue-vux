@@ -5,6 +5,9 @@
             <!-- <x-input title="昵称:" placeholder="请输入昵称" v-model="name"></x-input> -->
             <x-input title="登录账号" placeholder="请输入用户账号" v-model="username" :required="required"></x-input>
             <x-input title="登录密码" placeholder="请输入用户密码" type="password" v-model="userpwd" :required="required"></x-input>
+            <x-input title="验证码" placeholder="请输入验证码" v-model="InputNum" :max="InputNumMax" class="weui-vcode">
+                <x-button slot="right" type="primary" mini @click.native="verification()" >发送验证码</x-button>
+            </x-input>
         </group>
 
         <div class="mcj_login_btnwarp">
@@ -28,41 +31,71 @@ export default {
             username:'',
             userpwd:'',
             required:true,
+            NUM:'',
+            InputNum:'',
+            InputNumMax:6,
+
+            //验证码相关状态
+
             reg_url: this.HOST.host + '/register',
+            verification_url:this.HOST.host + '/verification'
         }
     },
     methods:{
+        // 获取验证码
+        verification:function(){
+            
+            this.$http.get(this.verification_url)
+            .then(res=>{
+                alert(res.data.verificationNum)
+                this.NUM = res.data.verificationNum
+                console.log(res)
+            })
+            .catch(err=>{
+                console.log(err)
+            })
+        },
+
+        // 注册
         register:function(){
             let _self = this;
             if(this.username !== '' && this.userpwd !== ''){
-                this.$http.post(this.reg_url,{
-                    // name:this.name,
-                    username:this.username,
-                    userpassword:this.userpwd
-                })
-                .then(res => {
-                    // console.log(res)
-                    if(res.data.code === 200){
-                        this.$vux.alert.show({
-                            title: '恭喜您注册成功！',
-                            content: '确定(将前往登录页面)',
-                            onShow () {
-                            },
-                            onHide () {
-                                _self.$router.push('/login')
-                            }
-                        })
-                    }
-                    else if(res.data.code === 404){
-                        this.$vux.toast.show({
-                            text: '用户已存在！',
-                            type:'warn'
-                        })
-                    }
-                }), res => {  
-                    console.log("获取信息失败");  
-                    console.log(res);  
-                }            
+                if(this.NUM == this.InputNum){
+                    this.$http.post(this.reg_url,{
+                        // name:this.name,
+                        username:this.username,
+                        userpassword:this.userpwd
+                    })
+                    .then(res => {
+                        // console.log(res)
+                        if(res.data.code === 200){
+                            this.$vux.alert.show({
+                                title: '恭喜您注册成功！',
+                                content: '确定(将前往登录页面)',
+                                onShow () {
+                                },
+                                onHide () {
+                                    _self.$router.push('/login')
+                                }
+                            })
+                        }
+                        else if(res.data.code === 404){
+                            this.$vux.toast.show({
+                                text: '用户已存在！',
+                                type:'warn'
+                            })
+                        }
+                    }), res => {  
+                        console.log("获取信息失败");  
+                        console.log(res);  
+                    }  
+                } 
+                else{
+                    this.$vux.toast.show({
+                        text: '验证码错误',
+                        type:'cancel'
+                    })
+                }         
             }
             else{
                 this.$vux.toast.show({

@@ -1,5 +1,7 @@
 <template>
-    
+    <div class="myPushList">
+        
+    </div>
 </template>
 
 <script>
