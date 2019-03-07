@@ -39,22 +39,23 @@
                                 <p>{{item.content}}</p>
                             </div>
 
-                            <div class="replyList" v-for="(n,i) in item.reply.slice(0,maxCommentReply)" :key="i" v-if="item.reply.length > 0">
-                                <div class="reply_content">
-                                    <p>
-                                        {{n.from.name}} 回复 {{n.to.name}}：{{n.content}}
-                                    </p>
-                                    <div class="reply_icon">
-                                        <span @click="reply(n.from.name,n.from._id,item._id)"></span>                                    
+                            <div v-if="item.reply.length > 0">
+                                <div class="replyList" v-for="(n,i) in item.reply.slice(0,maxCommentReply)" :key="i" >
+                                    <div class="reply_content">
+                                        <p>
+                                            {{n.from.name}} 回复 {{n.to.name}}：{{n.content}}
+                                        </p>
+                                        <div class="reply_icon">
+                                            <span @click="reply(n.from.name,n.from._id,item._id)"></span>                                    
+                                        </div>
                                     </div>
-                                </div>
+                                        
                                     
-                                
 
-                                <div class="bothClear"></div>
-                                
-                            </div>
-                            
+                                    <div class="bothClear"></div>
+                                    
+                                </div>
+                            </div>       
                         </div>
                     </li>
                 </ul>

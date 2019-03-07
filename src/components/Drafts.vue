@@ -62,7 +62,7 @@ export default {
                 _this.$vux.toast.show({
                     text: '删除成功',
                     type:'success',
-                    onHide () {                            
+                    onHide () { 
                         // _this.$router.go(0)
                         _this.$emit('reloadDraftsList')
                     }
